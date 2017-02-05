@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <header>
+    <div class="header">
       <div class="box-content">
         <md-toolbar>
           <md-button class="md-icon-button">
@@ -14,9 +14,11 @@
           </md-button>
         </md-toolbar>
       </div>
-    </header>
-    <div class="content box-content">
+    </div>
+    <div class="content">
+      <div class="box-content">
         <p>Some content...</p>
+      </div>
     </div>
     <md-whiteframe class="footer">
       <div class="box-content">

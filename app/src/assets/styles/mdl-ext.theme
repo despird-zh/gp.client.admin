@@ -11,7 +11,7 @@
   .sum-item{
     color: #{'BACKGROUND-CONTRAST-0.5'};
   }
-  .wrapper > header{
+  .wrapper > .header{
     background-color: #{'PRIMARY-COLOR'};
   }
 }
