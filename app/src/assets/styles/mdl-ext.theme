@@ -1,0 +1,17 @@
+/**
+ * customize the library style
+**/
+.THEME_NAME {
+  .bottom-line{
+    border-bottom: 1px solid #{'BACKGROUND-CONTRAST-0.12'};
+  }
+  .bg-color{
+    color: #{'BACKGROUND-COLOR'};
+  }
+  .sum-item{
+    color: #{'BACKGROUND-CONTRAST-0.5'};
+  }
+  .wrapper > header{
+    background-color: #{'PRIMARY-COLOR'};
+  }
+}

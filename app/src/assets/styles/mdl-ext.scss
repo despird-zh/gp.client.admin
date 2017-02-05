@@ -1,0 +1,53 @@
+@import './mdl-variables.scss';
+
+.md-m-rb{
+  margin-right: $gap-size !important;
+  margin-bottom: $gap-size !important;
+}
+
+.md-m-r{
+    margin-right: $gap-size !important;
+}
+.md-m-b{
+    margin-bottom: $gap-size !important;
+}
+.md-p{
+  padding: $gap-size !important;
+}
+
+.md-p-tb{
+  padding-top: $gap-size !important;
+  padding-bottom: $gap-size !important;
+}
+.md-p-rb{
+  padding-right: $gap-size !important;
+  padding-bottom: $gap-size !important;
+}
+.md-p-b{
+  padding-bottom: $gap-size !important;
+}
+
+.md-p-b-none{
+  padding-bottom: 0 !important;
+}
+
+.md-p-none{
+  padding: 0 !important;
+}
+
+.md-flex-row{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.md-flex-col{
+  display: flex;
+  flex-direction: column;
+}
+
+.md-spacer{
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 0%;
+}
