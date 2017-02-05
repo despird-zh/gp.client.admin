@@ -34,7 +34,7 @@ GPressMain = new GPressMain({
 });
 
 // set default theme of whole page
-switchTheme('default');
+switchTheme('indigo');
 // register the routing event
 router.beforeEach((to, from, next) => {
   Vue.nextTick(() => {

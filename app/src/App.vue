@@ -17,7 +17,17 @@
     </div>
     <div class="content">
       <div class="box-content">
+        <md-layout md-column="true">
+          <md-layout>
+            <md-page-toolbar></md-page-toolbar>
+          </md-layout>
+          <md-layout>
+        
         <p>Some content...</p>
+          </md-layout>
+          <md-layout></md-layout>
+        </md-layout>
+
       </div>
     </div>
     <md-whiteframe class="footer">
