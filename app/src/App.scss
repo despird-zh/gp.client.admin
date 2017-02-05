@@ -1,16 +1,14 @@
  @import './assets/styles/mdl-variables.scss';
 
-html,
 body {
-  height: 100%;
-  overflow: hidden;
+    margin:0px;
+    padding:0px;
 }
-body {
-    display: block;
-    overflow: auto;
+* {
+    box-sizing: border-box;
 }
-
 .wrapper{
+    width: 100%;
     > .header {
         position: fixed;
         width: 100%;
