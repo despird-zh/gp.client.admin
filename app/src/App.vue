@@ -17,13 +17,15 @@
     </div>
     <div class="content">
       <div class="box-content">
-        <md-layout md-column="true">
+        <md-layout :md-column=true>
           <md-layout>
-            <md-page-toolbar></md-page-toolbar>
+            <md-page-navs>
+              <md-page-nav>
+                slslslsl
+              </md-page-nav>
+            </md-page-navs>
           </md-layout>
           <md-layout>
-        
-        <p>Some content...</p>
           </md-layout>
           <md-layout></md-layout>
         </md-layout>

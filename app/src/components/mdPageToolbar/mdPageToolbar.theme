@@ -1,6 +1,0 @@
-.THEME_NAME {
-   &.md-page-header {
-      color: #{'PRIMARY-COLOR'};
-  }
-
-}
