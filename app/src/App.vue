@@ -19,9 +19,15 @@
       <div class="box-content">
         <md-layout :md-column=true>
           <md-layout>
-            <md-page-navs>
-              <md-page-nav>
-                slslslsl
+            <md-page-navs class="md-transparent">
+              <md-page-nav md-label="Page122">
+                slslslsl---1
+              </md-page-nav>
+              <md-page-nav md-label="Page2">
+                slslslsl--2
+              </md-page-nav>
+              <md-page-nav md-label="Page33">
+                slslslsl--3
               </md-page-nav>
             </md-page-navs>
           </md-layout>
@@ -80,9 +86,6 @@
       closeSidenav() {
         this.$refs['main-sidebar'].close();
       }
-    },
-    mounted: function() {
-      console.log(modules);
     }
   };
 </script>

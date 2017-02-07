@@ -20,8 +20,8 @@
 
       <span class="md-nav-indicator" :class="indicatorClasses" ref="indicator"></span>
     </md-whiteframe>
-    <div class="md-tabs-content" ref="tabContent" :style="{ height: contentHeight }">
-      <div class="md-tabs-wrapper" :style="{ transform: `translate3D(-${contentWidth}, 0, 0)` }">
+    <div class="md-tools-content" ref="toolContent" :style="{ height: contentHeight }">
+      <div class="md-tools-wrapper" :style="{ transform: `translate3D(-${contentWidth}, 0, 0)` }">
         <slot></slot>
       </div>
     </div>
@@ -89,6 +89,16 @@
       }
     },
     methods: {
+      getHeadersWidth() {
+        let totalWidth = 10;
+
+        if (this.$refs.navHeader && this.$refs.navHeader.length > 0) {
+          for (let i = 0; i < this.$refs.navHeader.length; i++) {
+            totalWidth += this.$refs.navHeader[i].offsetWidth;
+          }
+        }
+        return totalWidth;
+      },
       getHeaderClass(header) {
         return {
           'md-active': this.activeNav === header.id,
@@ -122,7 +132,7 @@
       },
       observeElementChanges() {
         this.parentObserver = new MutationObserver(throttle(this.calculateOnWatch, 50));
-        this.parentObserver.observe(this.$refs.tabContent, {
+        this.parentObserver.observe(this.$refs.toolContent, {
           childList: true,
           attributes: true,
           subtree: true
@@ -145,9 +155,12 @@
         }
       },
       calculateNavsWidthAndPosition() {
-        const width = this.$el.offsetWidth;
+        const headersWidth = this.getHeadersWidth();
+        const width = this.$el.offsetWidth - headersWidth;
         let index = 0;
 
+        this.$refs.toolContent.style.width = width + 'px';
+        this.$refs.toolContent.style.left = headersWidth + 'px';
         this.contentWidth = width * this.activeNavNumber + 'px';
 
         for (const navId in this.navList) {

@@ -6,10 +6,10 @@ $tab-max-width: 264px;
   margin: 0;
   align-items: center;
   justify-content: center;
-  -webkit-box-flex: 0;
-  -webkit-flex-grow: 0;
-  -ms-flex-positive: 0;
-  flex-grow: 0;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
 
   &.md-transition-off * {
     transition: none !important;
@@ -111,14 +111,14 @@ $tab-max-width: 264px;
     }
   }
 
-  .md-tabs-content {
-    width: 100%;
+  .md-tools-content {
     height: 0;
     position: relative;
     overflow: hidden;
+    top: -50px;
   }
 
-  .md-tabs-wrapper {
+  .md-tools-wrapper {
     width: 9999em;
     position: absolute;
     top: 0;
@@ -135,5 +135,7 @@ $tab-max-width: 264px;
     top: 0;
     left: 0;
     right: 0;
+    display: flex;
+    justify-content: flex-end;
   }
 }

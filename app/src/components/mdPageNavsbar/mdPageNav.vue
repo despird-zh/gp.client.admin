@@ -79,7 +79,7 @@
         };
       },
       updatePageNavData() {
-        this.parentNavsbar.updateNav(this.getPageNavData());
+        this.parentNavsbar.updatePageNav(this.getPageNavData());
       }
     },
     mounted() {
@@ -95,11 +95,11 @@
       this.parentNavsbar.updatePageNav(navData);
 
       if (this.mdActive) {
-        this.parentTabs.setActivePageNav(navData);
+        this.parentNavsbar.setActivePageNav(navData);
       }
     },
     beforeDestroy() {
-      this.parentTabs.unregisterPageNav(this.getPageNavData());
+      this.parentNavsbar.unregisterPageNav(this.getPageNavData());
     }
   };
 </script>
