@@ -44,8 +44,7 @@ router.beforeEach((to, from, next) => {
       mainContent.scrollTop = 0;
     }
 
-    GPressMain.closeSidenav();
-
+    GPressMain.reset();
     next();
   });
 });

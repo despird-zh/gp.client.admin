@@ -3,9 +3,9 @@
     <div class="header">
       <div class="box-content">
         <md-toolbar>
-          <md-button class="md-icon-button">
+          <router-link tag="md-button" to="/home" class="md-icon-button">
             <md-icon>home</md-icon>
-          </md-button>
+          </router-link>
           <h2 class="md-title" style="flex: 1">Hello Material Design Lite</h2>
           <md-button class="md-icon-button">
             <md-icon>info_outline</md-icon>
@@ -14,9 +14,9 @@
           <md-button class="md-icon-button">
             <md-icon>track_changes</md-icon>
           </md-button>
-          <md-button class="md-icon-button">
+          <router-link tag="md-button" to="/security" class="md-icon-button">
             <md-icon>security</md-icon>
-          </md-button>
+          </router-link>
           <md-button class="md-icon-button">
             <md-icon>device_hub</md-icon>
           </md-button>
@@ -70,20 +70,8 @@
       logon() {
         this.$refs['logon-box'].showLogon();
       },
-      toggleSidenav() {
-        let mediaWidth = window.innerWidth;
-
-        // media width > 1281, apply the [hide-sidenav] to hide sidenav
-        if (mediaWidth > 1281) {
-          this.embedSidenav = !this.embedSidenav;
-          return;
-        }
-
-        this.embedSidenav = false;
-        this.$refs['main-sidebar'].toggle();
-      },
-      closeSidenav() {
-        this.$refs['main-sidebar'].close();
+      reset() {
+        console.log('the root is reseting');
       }
     }
   };
