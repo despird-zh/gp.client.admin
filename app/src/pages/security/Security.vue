@@ -2,7 +2,7 @@
     <md-layout :md-column=true>
       <md-layout>
         <md-page-navs class="md-transparent">
-          <md-page-nav md-label="Page122">
+          <md-page-nav md-label="测试" md-icon="add">
             slslslsl---1
           </md-page-nav>
           <md-page-nav md-label="Page2">

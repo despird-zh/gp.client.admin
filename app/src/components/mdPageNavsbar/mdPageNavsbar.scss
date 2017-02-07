@@ -29,14 +29,6 @@ $tab-max-width: 264px;
     display: flex;
     transition: $swift-ease-out;
 
-    &.md-has-icon.md-has-label {
-      min-height: 72px;
-
-      .md-icon {
-        margin-bottom: 10px;
-      }
-    }
-
     &.md-centered {
       justify-content: center;
     }
@@ -78,7 +70,7 @@ $tab-max-width: 264px;
 
   .md-nav-header-container {
     display: flex;
-    flex-flow: column;
+    flex-flow: row;
     justify-content: center;
     align-items: center;
 
