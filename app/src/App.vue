@@ -4,38 +4,37 @@
       <div class="box-content">
         <md-toolbar>
           <md-button class="md-icon-button">
-            <md-icon>menu</md-icon>
+            <md-icon>home</md-icon>
           </md-button>
-
-          <h2 class="md-title" style="flex: 1">Default</h2>
-
+          <h2 class="md-title" style="flex: 1">Hello Material Design Lite</h2>
           <md-button class="md-icon-button">
-            <md-icon>favorite</md-icon>
+            <md-icon>info_outline</md-icon>
+            <md-tooltip md-delay="400" md-direction="bottom">About Information</md-tooltip>
           </md-button>
+          <md-button class="md-icon-button">
+            <md-icon>track_changes</md-icon>
+          </md-button>
+          <md-button class="md-icon-button">
+            <md-icon>security</md-icon>
+          </md-button>
+          <md-button class="md-icon-button">
+            <md-icon>device_hub</md-icon>
+          </md-button>
+          <md-button class="md-icon-button">
+            <md-icon>sd_storage</md-icon>
+          </md-button>
+          <md-button class="md-icon-button">
+            <md-icon>settings</md-icon>
+          </md-button>
+          <md-avatar>
+            <img src="assets/images/avatar.png" alt="Avatar">
+          </md-avatar>
         </md-toolbar>
       </div>
     </div>
     <div class="content">
       <div class="box-content">
-        <md-layout :md-column=true>
-          <md-layout>
-            <md-page-navs class="md-transparent">
-              <md-page-nav md-label="Page122">
-                slslslsl---1
-              </md-page-nav>
-              <md-page-nav md-label="Page2">
-                slslslsl--2
-              </md-page-nav>
-              <md-page-nav md-label="Page33">
-                slslslsl--3
-              </md-page-nav>
-            </md-page-navs>
-          </md-layout>
-          <md-layout>
-          </md-layout>
-          <md-layout></md-layout>
-        </md-layout>
-
+        <router-view></router-view>
       </div>
     </div>
     <md-whiteframe class="footer">
