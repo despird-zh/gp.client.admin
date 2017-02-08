@@ -12,7 +12,7 @@
 }
 </style>
 <script>
-  import uniqueId from '../../utils/UniqueId';
+  import uniqueId from '../../utils/uniqueId';
   import getClosestVueParent from '../../utils/getClosestVueParent';
 
   export default {

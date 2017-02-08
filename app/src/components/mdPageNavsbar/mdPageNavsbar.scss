@@ -10,7 +10,7 @@ $navbar-height: 60px;
   -webkit-flex-grow: 1;
   -ms-flex-positive: 1;
   flex-grow: 1;
-
+  height: $navbar-height + 15px;
   &.md-transition-off * {
     transition: none !important;
   }

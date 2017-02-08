@@ -31,7 +31,7 @@
 <style lang="scss" src="./mdPageNavsbar.scss"></style>
 
 <script>
-  import themeMixin from '../../utils/ThemeMixin';
+  import themeMixin from '../../utils/themeMixin';
   import throttle from '../../utils/throttle';
 
   export default {

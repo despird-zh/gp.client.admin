@@ -24,6 +24,7 @@
       </md-layout>
     </div>
 </template>
+
 <style lang="scss">
 .gp-module{
   display: -ms-flexbox;
@@ -37,6 +38,7 @@
   flex-direction: column;
 }
 </style>
+
 <script>
   export default {
     data: () => ({
