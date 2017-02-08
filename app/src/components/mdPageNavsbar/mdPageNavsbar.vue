@@ -1,14 +1,14 @@
 <template>
   <div class="md-page-navs" :class="[themeClass, navClasses]">
     <md-whiteframe md-tag="nav" class="md-navs-navigation" :md-elevation="mdElevation" :class="navigationClasses">
-      <button
+      <a
         v-for="header in navList"
         :key="header.id"
-        type="button"
-        class="md-nav-header"
+        class="md-nav-header md-button"
         :class="getHeaderClass(header)"
         :disabled="header.disabled"
         @click="setActivePageNav(header)"
+        :href="header.link"
         ref="navHeader">
         <md-ink-ripple :md-disabled="header.disabled"></md-ink-ripple>
         <div class="md-nav-header-container">
@@ -16,12 +16,12 @@
           <span v-if="header.label">{{ header.label }}</span>
           <md-tooltip v-if="header.tooltip" :md-direction="header.tooltipDirection" :md-delay="header.tooltipDelay">{{ header.tooltip }}</md-tooltip>
         </div>
-      </button>
+      </a>
 
       <span class="md-nav-indicator" :class="indicatorClasses" ref="indicator"></span>
     </md-whiteframe>
     <div class="md-tools-content" ref="toolContent" :style="{ height: contentHeight }">
-      <div class="md-tools-wrapper" :style="{ transform: `translate3D(-${contentWidth}, 0, 0)` }">
+      <div class="md-tools-wrapper" :class="contentClasses" :style="{ transform: `translate3D(-${contentWidth}, 0, 0)` }">
         <slot></slot>
       </div>
     </div>
@@ -61,6 +61,11 @@
       contentWidth: '0px'
     }),
     computed: {
+      contentClasses() {
+        return {
+          'md-right': !this.mdCentered && this.mdRight
+        };
+      },
       navClasses() {
         return {
           'md-dynamic-height': this.mdDynamicHeight,
@@ -160,7 +165,9 @@
         let index = 0;
 
         this.$refs.toolContent.style.width = width + 'px';
-        this.$refs.toolContent.style.left = headersWidth + 'px';
+        if (!this.mdRight) {
+          this.$refs.toolContent.style.left = headersWidth + 'px';
+        }
         this.contentWidth = width * this.activeNavNumber + 'px';
 
         for (const navId in this.navList) {

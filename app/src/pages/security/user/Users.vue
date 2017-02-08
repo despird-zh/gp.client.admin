@@ -4,7 +4,7 @@
         <md-button class="md-icon-button">
           <md-icon>menu</md-icon>
         </md-button>
-        <h2 class="md-title" style="flex: 1">Default2222</h2>
+        <h2 class="md-title" style="flex: 1">Default users</h2>
         <md-button class="md-icon-button">
           <md-icon>favorite</md-icon>
         </md-button>
@@ -22,13 +22,11 @@
     mixins: [routePage],
     data: function() {
       return {
-        initialValue: 'Demo2 Value'
+        pageId: 'users'
       };
     },
     props: {
       name: String
-    },
-    computed: {
     }
   };
 </script>

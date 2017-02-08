@@ -8,7 +8,7 @@ export default {
       children: [
         // an empty path will be treated as the default, e.g.
         // components rendered at /parent: Root -> Parent -> Default
-        { path: '', component: Users, name: 'Users'},
+        { path: '', redirect: 'users'},
 
         // components rendered at /parent/foo: Root -> Parent -> Foo
         { path: 'users', component: Users, name: 'Users'},

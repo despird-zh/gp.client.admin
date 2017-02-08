@@ -37,12 +37,8 @@ GPressMain = new GPressMain({
 switchTheme('indigo');
 // register the routing event
 router.beforeEach((to, from, next) => {
-  Vue.nextTick(() => {
-    let mainContent = document.querySelector('.main-content');
 
-    if (mainContent) {
-      mainContent.scrollTop = 0;
-    }
+  Vue.nextTick(() => {
 
     GPressMain.reset();
     next();

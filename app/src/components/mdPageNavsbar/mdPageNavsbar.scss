@@ -1,7 +1,7 @@
 @import '../../assets/styles/mdl-variables.scss';
 $tab-width: 72px;
 $tab-max-width: 264px;
-
+$navbar-height: 60px;
 .md-page-navs {
   margin: 0;
   align-items: center;
@@ -16,14 +16,14 @@ $tab-max-width: 264px;
   }
 
   &.md-dynamic-height {
-    .md-tabs-content {
+    .md-tools-content {
       transition: height $swift-ease-out-duration $swift-ease-out-timing-function;
     }
   }
 
   .md-navs-navigation {
-    height: 48px;
-    min-height: 48px;
+    height: $navbar-height;
+    min-height: $navbar-height;
     position: relative;
     z-index: 1;
     display: flex;
@@ -69,6 +69,7 @@ $tab-max-width: 264px;
   }
 
   .md-nav-header-container {
+    height: 100%;
     display: flex;
     flex-flow: row;
     justify-content: center;
@@ -107,7 +108,7 @@ $tab-max-width: 264px;
     height: 0;
     position: relative;
     overflow: hidden;
-    top: -50px;
+    top: -$navbar-height;
   }
 
   .md-tools-wrapper {
@@ -119,6 +120,11 @@ $tab-max-width: 264px;
     left: 0;
     transform: translate3d(0, 0, 0);
     transition: transform $swift-ease-out-duration $swift-ease-out-timing-function;
+    &.md-right{
+      .md-page-nav{
+        justify-content: flex-start;
+      }
+    }
   }
 
   .md-page-nav {

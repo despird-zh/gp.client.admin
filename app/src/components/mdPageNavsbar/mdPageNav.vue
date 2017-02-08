@@ -3,7 +3,14 @@
     <slot></slot>
   </div>
 </template>
-
+<style lang="scss" scoped>
+.md-page-nav{
+  > h3{
+    font-weight: 500;
+    margin: 5px 0 0 0 ;
+  }
+}
+</style>
 <script>
   import uniqueId from '../../utils/UniqueId';
   import getClosestVueParent from '../../utils/getClosestVueParent';
@@ -20,6 +27,7 @@
         type: String,
         default: '0'
       },
+      mdLink: String,
       mdTooltipDirection: {
         type: String,
         default: 'bottom'
@@ -68,6 +76,7 @@
       getPageNavData() {
         return {
           id: this.pageId,
+          link: this.mdLink,
           label: this.mdLabel,
           icon: this.mdIcon,
           active: this.mdActive,
@@ -88,9 +97,8 @@
       this.parentNavsbar = getClosestVueParent(this.$parent, 'md-page-navs');
 
       if (!this.parentNavsbar) {
-        throw new Error('You must wrap the md-tab in a md-tabs');
+        throw new Error('You must wrap the md-page-nav in a md-page-navs');
       }
-
       this.mounted = true;
       this.parentNavsbar.updatePageNav(navData);
 
