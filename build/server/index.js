@@ -10,18 +10,18 @@ import webpackConfig from '../webpack/dev';
 import opn from 'opn';
 
 const app = express();
+
 const compiler = webpack(webpackConfig);
 const rootPath = path.join(__dirname, '..', '..');
 const devMiddlewareInstance = devMiddleware(compiler, {
+  quiet: true,
   publicPath: config.publicPath,
-  index: config.indexPath,
-  stats: {
-    colors: true,
-    chunks: false
-  }
+  index: config.indexPath
 });
 
-const hotMiddlewareInstance = hotMiddleware(compiler);
+const hotMiddlewareInstance = hotMiddleware(compiler, {
+  log() { }
+});
 
 compiler.plugin('compilation', (compilation) => {
   compilation.plugin('html-webpack-plugin-after-emit', (data, done) => {
@@ -36,16 +36,19 @@ app.use(hotMiddlewareInstance);
 app.use('/', express.static(path.join(rootPath, config.appPath)));
 app.use('/assets', express.static(path.join(rootPath, config.assetsPath)));
 
+devMiddlewareInstance.waitUntilValid(() => {
+  let uri = 'http://localhost:' + config.server.port;
+
+  console.log(chalk.blue('> Listening at ' + uri + '\n'));
+});
+
 export default app.listen(config.server.port, (error) => {
   let uri = 'http://localhost:' + config.server.port;
 
   if (error) {
     console.log(chalk.red(error));
-
     return;
   }
-
-  console.log(chalk.blue('Listening at ' + uri + '\n'));
   // open the browser
   opn(uri);
 });
