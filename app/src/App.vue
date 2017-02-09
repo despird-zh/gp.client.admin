@@ -71,7 +71,7 @@
         this.$refs['logon-box'].showLogon();
       },
       reset() {
-        console.log('the root is reseting');
+        console.log('the root is reseted');
       }
     }
   };

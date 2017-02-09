@@ -17,7 +17,6 @@
           <md-tooltip v-if="header.tooltip" :md-direction="header.tooltipDirection" :md-delay="header.tooltipDelay">{{ header.tooltip }}</md-tooltip>
         </div>
       </a>
-
       <span class="md-nav-indicator" :class="indicatorClasses" ref="indicator"></span>
     </md-whiteframe>
     <div class="md-tools-content" ref="toolContent" :style="{ height: contentHeight }">

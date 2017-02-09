@@ -20,7 +20,9 @@ const devMiddlewareInstance = devMiddleware(compiler, {
 });
 
 const hotMiddlewareInstance = hotMiddleware(compiler, {
-  log() { }
+  log(msg){ 
+    console.log(msg);
+  }
 });
 
 compiler.plugin('compilation', (compilation) => {
