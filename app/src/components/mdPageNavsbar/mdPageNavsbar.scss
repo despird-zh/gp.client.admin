@@ -109,17 +109,6 @@ $navbar-height: 60px;
     position: relative;
     overflow: hidden;
     top: -$navbar-height;
-  }
-
-  .md-tools-wrapper {
-    width: 9999em;
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    transform: translate3d(0, 0, 0);
-    transition: transform $swift-ease-out-duration $swift-ease-out-timing-function;
     &.md-right{
       .md-page-nav{
         justify-content: flex-start;

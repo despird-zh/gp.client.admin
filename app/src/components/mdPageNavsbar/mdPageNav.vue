@@ -1,11 +1,11 @@
 <template>
-  <div class="md-page-nav" :id="pageId" :style="styles">
+  <div class="md-page-nav" :id="pageId" :style="styles" v-show="visible">
     <slot></slot>
   </div>
 </template>
 <style lang="scss" scoped>
 .md-page-nav{
-  > h3{
+  >h3 {
     font-weight: 500;
     margin: 5px 0 0 0 ;
   }
@@ -36,9 +36,9 @@
     data() {
       return {
         mounted: false,
-        pageId: this.id || 'tab-' + uniqueId(),
+        visible: this.mdActive,
         width: '0px',
-        left: '0px'
+        pageId: this.id || 'tab-' + uniqueId()
       };
     },
     watch: {
@@ -67,8 +67,7 @@
     computed: {
       styles() {
         return {
-          width: this.width,
-          left: this.left
+          width: this.width
         };
       }
     },

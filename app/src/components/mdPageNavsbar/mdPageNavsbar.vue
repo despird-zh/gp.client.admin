@@ -19,10 +19,8 @@
       </a>
       <span class="md-nav-indicator" :class="indicatorClasses" ref="indicator"></span>
     </md-whiteframe>
-    <div class="md-tools-content" ref="toolContent" :style="{ height: contentHeight }">
-      <div class="md-tools-wrapper" :class="contentClasses" :style="{ transform: `translate3D(-${contentWidth}, 0, 0)` }">
-        <slot></slot>
-      </div>
+    <div class="md-tools-content" :class="contentClasses" ref="toolContent" :style="{ height: contentHeight }">
+      <slot></slot>
     </div>
   </div>
 </template>
@@ -161,20 +159,21 @@
       calculateNavsWidthAndPosition() {
         const headersWidth = this.getHeadersWidth();
         const width = this.$el.offsetWidth - headersWidth;
-        let index = 0;
 
         this.$refs.toolContent.style.width = width + 'px';
         if (!this.mdRight) {
           this.$refs.toolContent.style.left = headersWidth + 'px';
         }
-        this.contentWidth = width * this.activeNavNumber + 'px';
 
         for (const navId in this.navList) {
           const nav = this.navList[navId];
 
+          if (this.activeNav === navId) {
+            nav.ref.visible = true;
+          } else {
+            nav.ref.visible = false;
+          }
           nav.ref.width = width + 'px';
-          nav.ref.left = width * index + 'px';
-          index++;
         }
       },
       calculateContentHeight() {
