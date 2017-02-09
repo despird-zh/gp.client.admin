@@ -117,7 +117,7 @@ $navbar-height: 60px;
   }
 
   .md-page-nav {
-    padding: 16px;
+    padding: 16px $gap-size $gap-size $gap-size;
     position: absolute;
     top: 0;
     left: 0;

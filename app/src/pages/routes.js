@@ -1,6 +1,7 @@
 // this file define all the routing information
 import Error404 from './Error';
 import Home from './home/Home';
+import ConfigureModule from './configure';
 import SecurityModule from './security';
 // extra setting
 const ExtraModule = {
@@ -27,7 +28,7 @@ const ExtraModule = {
 
 export default
 {
-  routes: [].concat(ExtraModule.routes, SecurityModule.routes),
+  routes: [].concat(ExtraModule.routes, SecurityModule.routes, ConfigureModule.routes),
 
   modules: [ExtraModule]
 };

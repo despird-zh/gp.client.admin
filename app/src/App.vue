@@ -23,7 +23,7 @@
           <md-button class="md-icon-button">
             <md-icon>sd_storage</md-icon>
           </md-button>
-          <md-button class="md-icon-button">
+          <md-button href="#/configure" class="md-icon-button">
             <md-icon>settings</md-icon>
           </md-button>
           <md-avatar>
