@@ -14,9 +14,9 @@
           <md-button class="md-icon-button">
             <md-icon>track_changes</md-icon>
           </md-button>
-          <router-link tag="md-button" to="/security" class="md-icon-button">
+          <md-button href="#/security" class="md-icon-button">
             <md-icon>security</md-icon>
-          </router-link>
+          </md-button>
           <md-button class="md-icon-button">
             <md-icon>device_hub</md-icon>
           </md-button>
