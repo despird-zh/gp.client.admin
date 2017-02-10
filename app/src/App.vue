@@ -42,6 +42,7 @@
       1dp
       </div>
     </md-whiteframe>
+    <md-signin ref="signinDialog"></md-signin>
   </div>
 </template>
 
@@ -67,8 +68,8 @@
       }
     },
     methods: {
-      logon() {
-        this.$refs['logon-box'].showLogon();
+      signin() {
+        this.$refs.signinDialog.openSignin();
       },
       reset() {
         console.log('the root is reseted');
