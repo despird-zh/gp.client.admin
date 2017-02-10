@@ -3,9 +3,9 @@
     <div class="header">
       <div class="box-content">
         <md-toolbar>
-          <router-link tag="md-button" to="/home" class="md-icon-button">
+          <md-button href="#/home" class="md-icon-button">
             <md-icon>home</md-icon>
-          </router-link>
+          </md-button>
           <h2 class="md-title" style="flex: 1">Hello Material Design Lite</h2>
           <md-button class="md-icon-button">
             <md-icon>info_outline</md-icon>
@@ -42,7 +42,7 @@
       1dp
       </div>
     </md-whiteframe>
-    <md-signin ref="signinDialog"></md-signin>
+    <md-logon ref="logonDialog"></md-logon>
   </div>
 </template>
 
@@ -68,8 +68,8 @@
       }
     },
     methods: {
-      signin() {
-        this.$refs.signinDialog.openSignin();
+      logon() {
+        this.$refs.logonDialog.showLogon();
       },
       reset() {
         console.log('the root is reseted');

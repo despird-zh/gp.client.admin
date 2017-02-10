@@ -94,7 +94,7 @@
     },
     methods: {
       signin() {
-        this.$root.signin();
+        this.$root.logon();
       }
     }
   };

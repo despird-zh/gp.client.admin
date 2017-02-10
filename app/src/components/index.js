@@ -2,10 +2,10 @@
 import Vue from 'vue';
 
 import PageNavsbar from './mdPageNavsbar';
-import SigninDialog from './mdSigninDialog';
+import LogonDialog from './mdLogonDialog';
 // custom theme
 import MdExtTheme from '../assets/styles/mdl-ext.theme';
 Vue.material.styles.push(MdExtTheme);
 
 Vue.use(PageNavsbar);
-Vue.use(SigninDialog);
+Vue.use(LogonDialog);
