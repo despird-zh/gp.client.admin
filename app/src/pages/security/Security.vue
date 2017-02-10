@@ -2,50 +2,48 @@
     <div class="gp-module">
       <div>
         <md-page-navs class="md-transparent" :md-right=true ref="pageNavsbar">
-          <md-page-nav id="users" md-label="测试" md-icon="person" md-link="#/security/users">
-            <h3>测试页面名称 1
-              <small>页面说明</small>
-            </h3>
-          </md-page-nav>
-          <md-page-nav id="groups" md-label="Page2" md-icon="people" md-link="#/security/groups">
-            <h3>测试页面名称 2
-              <small>页面说明</small>
-            </h3>
-          </md-page-nav>
-          <md-page-nav id="test3" md-label="Page33">
-            <h3>测试页面名称 3
-              <small>页面说明</small>
+          <md-page-nav v-for="(pageInfo, pageId) in pageInfos" 
+            :id="pageId" 
+            :md-label="pageInfo.label" 
+            :md-icon="pageInfo.icon" 
+            :md-link="pageInfo.link">
+            <h3>{{ pageInfo.title }}
+              <small>{{ pageInfo.description }}</small>
             </h3>
           </md-page-nav>
         </md-page-navs>
       </div>
-      <div>
-        <router-view></router-view>
-      </div>
+      <router-view></router-view>
     </div>
 </template>
-
-<style lang="scss">
-.gp-module{
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  -ms-flex-wrap: wrap;
-  flex-wrap: wrap;
-  -ms-flex: 1;
-  flex: 1;
-  flex-direction: column;
-}
-</style>
 
 <script>
   export default {
     data: () => ({
-      currentPage: null
+      currentPage: null,
+      pageInfos: {
+        users: {
+          icon: 'person',
+          label: 'Users',
+          title: 'User Account',
+          description: 'Maintein the accounts',
+          link: '#/security/users'
+        },
+        groups: {
+          icon: 'people',
+          label: 'Groups',
+          title: 'User Group',
+          description: 'Maintein the groups',
+          link: '#/security/groups'
+        }
+      }
     }),
     methods: {
       setCurrentPageNav() {
+        let pageInfo = this.pageInfos[this.currentPage];
+  
+        document.title = pageInfo.label + ' - Vue Material';
+
         this.$refs.pageNavsbar.setActivePageNav({
           id: this.currentPage
         });

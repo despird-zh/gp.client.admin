@@ -3,18 +3,26 @@
 **/
 import getClosestVueParent from '../../utils/getClosestVueParent';
 export default {
-
-  mounted() {
-    let pageName = this.$route.name;
-    let moduleParent = getClosestVueParent(this.$parent, 'gp-module');
-
-    document.title = pageName + ' - Vue Material';
-    if (moduleParent) {
-      moduleParent.currentPage = this.pageId;
+  data: () => {
+    return {
+      moduleParent: false
+    };
+  },
+  methods: {
+    registerModulePage() {
+      if (!this.moduleParent) {
+        this.moduleParent = getClosestVueParent(this.$parent, 'gp-module');
+      }
+      if (this.moduleParent && this.getPageId) {
+        this.moduleParent.currentPage = this.getPageId();
+      }
     }
+  },
+  mounted() {
+    this.registerModulePage();
     this.$nextTick(() => {
-      if (this.pageId && moduleParent) {
-        moduleParent.setCurrentPageNav();
+      if (this.getPageId && this.moduleParent) {
+        this.moduleParent.setCurrentPageNav();
       }
     });
   }

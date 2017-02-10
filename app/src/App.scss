@@ -15,7 +15,7 @@ html,body,div {
     > .header {
         position: fixed;
         width: 100%;
-        height: 64px;
+        height: $header-height;
         top: 0px;
         z-index: 2;
 
@@ -33,7 +33,7 @@ html,body,div {
         position: fixed; /* or static */
         width: 100%;
         bottom:0px;
-        height: 64px;
+        height: $footer-height;
         z-index:2;
 
         .box-content{
@@ -42,7 +42,8 @@ html,body,div {
     }
 
     > .content{
-        margin-top: 64px;
+        margin-top: $header-height;
+        margin-bottom: $footer-height;
         position: relative; /* or static */
         z-index:1;
 

@@ -2,42 +2,41 @@
     <div class="gp-module">
       <div>
         <md-page-navs class="md-transparent" :md-right=true ref="pageNavsbar">
-          <md-page-nav id="profile" md-label="测试" md-icon="person" md-link="#/configure/profile">
-            <h3>系统信息
-              <small>查看系统摘要信息</small>
-            </h3>
-          </md-page-nav>
-          <md-page-nav id="settings" md-label="Page2" md-icon="people" md-link="#/configure/settings">
-            <h3>系统设置
-              <small>查看系统中参数设置</small>
+          <md-page-nav v-for="(pageInfo, pageId) in pageInfos" 
+            :id="pageId" 
+            :md-label="pageInfo.label" 
+            :md-icon="pageInfo.icon" 
+            :md-link="pageInfo.link">
+            <h3>{{ pageInfo.title }}
+              <small>{{ pageInfo.description }}</small>
             </h3>
           </md-page-nav>
         </md-page-navs>
       </div>
-      <div>
-        <router-view></router-view>
-      </div>
+      <router-view></router-view>
     </div>
 </template>
-
-<style lang="scss">
-.gp-module{
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  -ms-flex-wrap: wrap;
-  flex-wrap: wrap;
-  -ms-flex: 1;
-  flex: 1;
-  flex-direction: column;
-}
-</style>
 
 <script>
   export default {
     data: () => ({
-      currentPage: null
+      currentPage: null,
+      pageInfos: {
+        profile: {
+          icon: 'person',
+          label: 'Profile',
+          title: 'System Profle',
+          description: 'Maintein the accounts',
+          link: '#/configure/profile'
+        },
+        settings: {
+          icon: 'people',
+          label: 'Settings',
+          title: 'System settings',
+          description: 'Maintein the groups',
+          link: '#/configure/settings'
+        }
+      }
     }),
     methods: {
       setCurrentPageNav() {

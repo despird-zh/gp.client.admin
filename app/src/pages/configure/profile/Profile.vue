@@ -2,7 +2,7 @@
     <div class="gp-profile md-p">
       <md-toolbar class="md-transparent">
         <md-chip >由XXX于2017-5-6 11:11:22 最后更新</md-chip>
-        <div class="md-spacer"></div>
+        <div class="gp-spacer"></div>
         <md-button class="md-raised">刷新</md-button>
         <md-button class="md-raised md-warn">保存</md-button>
       </md-toolbar>

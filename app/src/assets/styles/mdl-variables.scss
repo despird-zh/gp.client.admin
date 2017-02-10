@@ -1,15 +1,9 @@
 @import '~vue-material/src/core/stylesheets/variables.scss';
-// width to embed the sidenav in container
-$embed-sidenav-width: 1281px;
-// width of sidenav 
-$sizebar-width: 230px;
-// customize the height of tab nav header
-$tabs-nav-height: 48px;
 // the the size of dense avatar
 $dense-avatar-size: 32px;
 // default margin size
 $gap-size: 10px;
-// page right nav
-$page-rightnav-width: 300px;
-// page footer height
-$page-footer-height: 40px;
+// the height of header
+$header-height: 64px;
+// the height of footer
+$footer-height: 64px;
