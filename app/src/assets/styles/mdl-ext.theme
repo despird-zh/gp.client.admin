@@ -14,4 +14,8 @@
   .wrapper > .header{
     background-color: #{'PRIMARY-COLOR'};
   }
+
+  .wrapper > .footer{
+    background-color: #{'BACKGROUND-COLOR'};
+  }
 }

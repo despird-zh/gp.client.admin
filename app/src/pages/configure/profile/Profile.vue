@@ -1,36 +1,49 @@
 <template>
     <div class="gp-profile md-p">
-      <form novalidate @submit.stop.prevent="submit">
-        <md-input-container>
-          <label>Initial value</label>
-          <md-input v-model="initialValue"></md-input>
-        </md-input-container>
+      <md-toolbar class="md-transparent">
+        <md-chip >由XXX于2017-5-6 11:11:22 最后更新</md-chip>
+        <div class="md-spacer"></div>
+        <md-button class="md-raised">刷新</md-button>
+        <md-button class="md-raised md-warn">保存</md-button>
+      </md-toolbar>
+      <md-layout md-gutter="16">
+        <md-layout md-flex="80">
+          <form novalidate @submit.stop.prevent="submit" class="profile-form">
+            <md-input-container>
+              <label>Initial value</label>
+              <md-input v-model="initialValue"></md-input>
+            </md-input-container>
 
-        <md-input-container>
-          <label>With label</label>
-          <md-input placeholder="My nice placeholder"></md-input>
-        </md-input-container>
+            <md-input-container>
+              <label>With label</label>
+              <md-input placeholder="My nice placeholder"></md-input>
+            </md-input-container>
 
-        <md-input-container md-inline>
-          <label>Inline field</label>
-          <md-input></md-input>
-        </md-input-container>
+            <md-input-container md-inline>
+              <label>Inline field</label>
+              <md-input></md-input>
+            </md-input-container>
 
-        <md-input-container>
-          <label>Number</label>
-          <md-input type="number"></md-input>
-        </md-input-container>
+            <md-input-container>
+              <label>Number</label>
+              <md-input type="number"></md-input>
+            </md-input-container>
 
-        <md-input-container>
-          <label>Textarea</label>
-          <md-textarea></md-textarea>
-        </md-input-container>
+            <md-input-container>
+              <label>Textarea</label>
+              <md-textarea></md-textarea>
+            </md-input-container>
 
-        <md-input-container>
-          <label>Disabled</label>
-          <md-input disabled></md-input>
-        </md-input-container>
-      </form>
+            <md-input-container>
+              <label>Disabled</label>
+              <md-input disabled></md-input>
+            </md-input-container>
+          </form>
+        </md-layout>
+        <md-layout md-flex="20">
+          页面展示相关的说明信息
+        </md-layout>
+      </md-layout>
     </div>
 </template>
 

@@ -1,6 +1,6 @@
 <template>
     <div class="gp-module">
-      <md-layout>
+      <div>
         <md-page-navs class="md-transparent" :md-right=true ref="pageNavsbar">
           <md-page-nav id="users" md-label="测试" md-icon="person" md-link="#/security/users">
             <h3>测试页面名称 1
@@ -18,10 +18,10 @@
             </h3>
           </md-page-nav>
         </md-page-navs>
-      </md-layout>
-      <md-layout>
+      </div>
+      <div>
         <router-view></router-view>
-      </md-layout>
+      </div>
     </div>
 </template>
 
