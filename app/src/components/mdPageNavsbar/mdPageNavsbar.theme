@@ -91,5 +91,9 @@
         }
       }
     }
+
+    .md-page-nav {
+      color: #{'BACKGROUND-CONTRAST-0.64'};
+    }
   }
 }

@@ -26,9 +26,9 @@
           <md-button href="#/configure" class="md-icon-button">
             <md-icon>settings</md-icon>
           </md-button>
-          <md-avatar>
-            <img src="assets/images/avatar.png" alt="Avatar">
-          </md-avatar>
+          <md-button @click.native="logon()" class="md-icon-button">
+            <md-icon>open_in_browser</md-icon>
+          </md-button>
         </md-toolbar>
       </div>
     </div>

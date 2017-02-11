@@ -1,5 +1,15 @@
 @import './mdl-variables.scss';
-
+.md-button.md-fab.md-xmini,
+.md-button.md-icon-button.md-xmini {
+    width: 32px;
+    height: 32px;
+    min-height: 32px;
+    min-width: 32px;
+    line-height: 32px;
+    > i {
+      font-size: 21px;
+    }
+}
 .gp-m-rb{
   margin-right: $gap-size !important;
   margin-bottom: $gap-size !important;
@@ -62,4 +72,8 @@
   -ms-flex: 1;
   flex: 1;
   flex-direction: column;
+
+  .gp-toolbar{
+    min-height: $page-toolbar-height;
+  }
 }

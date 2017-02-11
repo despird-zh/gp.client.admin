@@ -2,6 +2,46 @@
  * customize the library style
 **/
 .THEME_NAME {
+  @mixin gp-toolbar-spec($second-color, $third-color) {
+
+    .md-input-container {
+      &.md-input-focused {
+        input,
+        textarea {
+          color: $second-color;
+          text-shadow: 0 0 0 $second-color;
+        }
+
+        label,
+        .md-icon:not(.md-icon-delete) {
+          color: $second-color;
+        }
+        
+      }
+      .md-icon:after {
+          background-color: transparent;
+      }
+      &:after {
+        background-color: $second-color;
+      }
+
+      input,
+      textarea {
+        color: $second-color;
+        text-shadow: 0 0 0 $second-color;
+
+        &::-webkit-input-placeholder {
+          color: $third-color;
+        }
+      }
+
+      label,
+      .md-icon:not(.md-icon-delete) {
+        color: $second-color;
+      }
+    }
+  }
+
   .bottom-line{
     border-bottom: 1px solid #{'BACKGROUND-CONTRAST-0.12'};
   }
@@ -18,4 +58,12 @@
   .wrapper > .footer{
     background-color: #{'BACKGROUND-COLOR'};
   }
+
+  .gp-toolbar{
+    &.md-transparent {
+      @include gp-toolbar-spec(#{'BACKGROUND-CONTRAST-0.22'}, #{'PRIMARY-CONTRAST-0.54'})
+    }
+  }
+
+
 }

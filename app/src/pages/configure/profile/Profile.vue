@@ -1,10 +1,14 @@
 <template>
     <div class="gp-profile md-p">
-      <md-toolbar class="md-transparent">
+      <md-toolbar class="md-transparent gp-toolbar">
         <md-chip >由XXX于2017-5-6 11:11:22 最后更新</md-chip>
         <div class="gp-spacer"></div>
-        <md-button class="md-raised">刷新</md-button>
-        <md-button class="md-raised md-warn">保存</md-button>
+        <md-button class="md-raised">
+          <md-icon>cached</md-icon>
+        </md-button>
+        <md-button class="md-raised md-warn">
+          <md-icon>save</md-icon>
+        </md-button>
       </md-toolbar>
       <md-layout md-gutter="16">
         <md-layout md-flex="80">

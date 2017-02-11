@@ -23,14 +23,14 @@
       currentPage: null,
       pageInfos: {
         profile: {
-          icon: 'person',
+          icon: 'laptop',
           label: 'Profile',
           title: 'System Profle',
           description: 'Maintein the accounts',
           link: '#/configure/profile'
         },
         settings: {
-          icon: 'people',
+          icon: 'settings',
           label: 'Settings',
           title: 'System settings',
           description: 'Maintein the groups',

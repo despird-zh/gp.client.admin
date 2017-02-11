@@ -1,6 +1,8 @@
 <template>
   <div class="gp-logon">
-    <md-dialog ref="logonDialog">
+    <md-dialog ref="logonDialog"
+      :md-click-outside-to-close="!modalMode"
+      :md-esc-to-close="!modalMode">
       <md-dialog-title>Welcome to Groupress</md-dialog-title>
 
       <md-dialog-content>
@@ -37,7 +39,8 @@
     data: () => ({
       account: 'dev1',
       password: '1',
-      message: ''
+      message: '',
+      modalMode: false
     }),
     computed: {
       ...mapGetters(['jwttoken', 'subject', 'audience', 'baseUrl'])

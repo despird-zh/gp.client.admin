@@ -16,6 +16,9 @@ export default {
       if (this.moduleParent && this.getPageId) {
         this.moduleParent.currentPage = this.getPageId();
       }
+    },
+    showLogon() {
+      this.$root.logon();
     }
   },
   mounted() {
