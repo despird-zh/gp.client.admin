@@ -1,7 +1,10 @@
 <template>
     <div class="gp-module">
       <div>
-        <md-page-navs class="md-transparent" :md-right=true ref="pageNavsbar">
+        <md-page-navs class="md-transparent" 
+          :md-right=true
+          @change="onChangePage"
+          ref="pageNavsbar">
           <md-page-nav v-for="(pageInfo, pageId) in pageInfos" 
             :id="pageId" 
             :md-label="pageInfo.label" 
@@ -39,6 +42,9 @@
       }
     }),
     methods: {
+      onChangePage(pageId) {
+        document.title = this.pageInfos[pageId].label + ' - Vue Material';
+      },
       setCurrentPageNav() {
         this.$refs.pageNavsbar.setActivePageNav({
           id: this.currentPage

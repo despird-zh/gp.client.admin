@@ -7,9 +7,9 @@
             <md-icon>clear</md-icon>
           </md-button>
         </md-input-container>
-        <md-checkbox md-theme="orange"  id="my-test5" name="my-test5" v-model="checkbox2" class="md-primary">参数类型</md-checkbox>
-        <md-checkbox md-theme="green"  id="my-test6" name="my-test6" v-model="checkbox2" class="md-primary">Primary Green</md-checkbox>
-        <md-checkbox md-theme="light-blue" id="my-test7" name="my-test7" v-model="checkbox2" class="md-primary">Primary Light Blue</md-checkbox>
+        <md-checkbox md-theme="orange"  id="my-test5" name="my-test5" class="md-primary">参数类型</md-checkbox>
+        <md-checkbox md-theme="green"  id="my-test6" name="my-test6"  class="md-primary">Primary Green</md-checkbox>
+        <md-checkbox md-theme="light-blue" id="my-test7" name="my-test7" class="md-primary">Primary Light Blue</md-checkbox>
         <div class="gp-spacer"></div>
         <md-button class="md-raised">
           <md-icon>search</md-icon>

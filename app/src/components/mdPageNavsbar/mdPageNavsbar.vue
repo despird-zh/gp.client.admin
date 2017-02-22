@@ -213,7 +213,7 @@
         this.activeNav = navData.id;
         this.activeNavNumber = this.getPageNavIndex(this.activeNav);
         this.calculatePosition();
-        this.$emit('change', this.activeNavNumber);
+        this.$emit('change', this.activeNav);
       }
     },
     mounted() {
