@@ -23,7 +23,7 @@
         <md-button class="md-primary md-raised" @click.native="submitLogon()">SignOn</md-button>
       </md-dialog-actions>
     </md-dialog>
-    <md-snackbar md-position="top center" ref="msgbar" md-duration="4000">
+    <md-snackbar md-position="top center" ref="msgbar" md-duration="2000">
       <span>{{ message }}</span>
     </md-snackbar>
   </div>
@@ -62,13 +62,16 @@
           audience: this.audience
         };
 
-        this.$http.post(this.$httpUrl('authenticate.do'), body, options).then(function(response) {
-          let data = response.body;
+        this.$http.post(this.$httpUrl('authenticate.do'), body, options).then(
+        function(response) {
+          let respdata = response.body;
 
-          if (data.meta.state === 'success') {
-            this.saveJwtToken({subject: this.account, jwttoken: data.data});
+          if (respdata.meta.state === 'success') {
+            this.saveJwtToken({subject: this.account, jwttoken: respdata.data});
             this.closeLogon();
           }
+          this.message = respdata.meta.message;
+          this.$refs.msgbar.open();
         }, function(response) {
           if (response.ok) {
             this.message = '用户或密码错误，请重新登录。';
