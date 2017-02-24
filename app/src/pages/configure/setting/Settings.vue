@@ -11,7 +11,8 @@
         <md-checkbox md-theme="green"  id="my-test6" name="my-test6"  class="md-primary">Primary Green</md-checkbox>
         <md-checkbox md-theme="light-blue" id="my-test7" name="my-test7" class="md-primary">Primary Light Blue</md-checkbox>
         <div class="gp-spacer"></div>
-        <md-button class="md-raised">
+        <md-button class="md-raised"
+          @click.native="searchSetting">
           <md-icon>search</md-icon>
         </md-button>
         <md-button class="md-raised md-warn">
@@ -48,17 +49,32 @@
 </style>
 
 <script>
-
+  import httpOptions from '../../../utils/jwtToken';
+  import { mapGetters } from 'vuex';
   import routePage from '../../common/RoutePage';
   export default {
-    mixins: [routePage],
+    mixins: [routePage, httpOptions],
     data: function() {
       return {
         pageId: 'settings'
       };
     },
-    props: {
-      name: String
+    computed: {
+      ...mapGetters(['jwttoken', 'subject', 'audience', 'baseUrl'])
+    },
+    methods: {
+      searchSetting() {
+        let options = this.$httpOptions();
+
+        this.$http.post(this.$httpUrl('sys-opts-query.do'), {}, options).then(
+        function(response) {
+          console.log('----- ok ');
+          console.log(response);
+        }, function(response) {
+          console.log('----- fail ');
+          console.log(response);
+        });
+      }
     }
   };
 </script>
