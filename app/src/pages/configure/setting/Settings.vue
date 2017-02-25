@@ -20,7 +20,7 @@
         </md-button>
       </md-toolbar>
       <md-layout md-gutter="16">
-        <md-table v-once>
+        <md-table >
           <md-table-header>
             <md-table-row>
               <md-table-head>Dessert (100g serving)</md-table-head>
@@ -72,15 +72,14 @@
 
         this.$http.post(this.$httpUrl('sys-opts-query.do'), {group: 'BASIC'}, options).then(
         function(response) {
+          let data = response.body.data;
+          let meta = response.body.meta;
 
-          console.log(response.body.meta);
-          if (response.body.meta.state === 'success') {
+          console.log(meta);
+          if (meta.state === 'success') {
             console.log('----- ok ');
-            console.log(response.body.data);
-            for ( let i; i < response.body.data.length; i++) {
-              console.log(response.body.data[i]);
-              this.settings.push(response.body.data[i]);
-            }
+            this.settings = data;
+
           } else {
 
             console.log('----- fail ');
