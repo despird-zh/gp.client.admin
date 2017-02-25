@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="gp-settings">
       <md-toolbar class="md-transparent gp-toolbar">
         <md-input-container style="flex: 1">
           <md-input placeholder="Search..." />
@@ -46,8 +46,13 @@
 </template>
 
 <style lang="scss" scoped>
-  .md-input-container{
-    margin-right: 10px;
+  .gp-settings {
+    .md-input-container{
+      margin-right: 10px;
+      &.md-input{
+        font-size: 14px;
+      }
+    }
   }
 </style>
 
