@@ -32,9 +32,12 @@
           </md-table-header>
 
           <md-table-body>
-            <md-table-row v-for="(row, index) in 5" :key="index">
-              <md-table-cell>Dessert Name</md-table-cell>
-              <md-table-cell v-for="(col, index) in 4" :key="index" md-numeric>10</md-table-cell>
+            <md-table-row v-for="(setting, index) in settings" :key="index">
+              <md-table-cell>{{ setting.group }}</md-table-cell>
+              <md-table-cell>{{ setting.option }}</md-table-cell>
+              <md-table-cell>{{ setting.value }}</md-table-cell>
+              <md-table-cell>{{ setting.description }}</md-table-cell>
+              <md-table-cell>ttt</md-table-cell>
             </md-table-row>
           </md-table-body>
         </md-table>
@@ -54,9 +57,10 @@
   import routePage from '../../common/RoutePage';
   export default {
     mixins: [routePage, httpOptions],
-    data: function() {
+    data: () => {
       return {
-        pageId: 'settings'
+        pageId: 'settings',
+        settings: []
       };
     },
     computed: {
@@ -66,10 +70,21 @@
       searchSetting() {
         let options = this.$httpOptions();
 
-        this.$http.post(this.$httpUrl('sys-opts-query.do'), {}, options).then(
+        this.$http.post(this.$httpUrl('sys-opts-query.do'), {group: 'BASIC'}, options).then(
         function(response) {
-          console.log('----- ok ');
-          console.log(response);
+
+          console.log(response.body.meta);
+          if (response.body.meta.state === 'success') {
+            console.log('----- ok ');
+            console.log(response.body.data);
+            for ( let i; i < response.body.data.length; i++) {
+              console.log(response.body.data[i]);
+              this.settings.push(response.body.data[i]);
+            }
+          } else {
+
+            console.log('----- fail ');
+          }
         }, function(response) {
           console.log('----- fail ');
           console.log(response);

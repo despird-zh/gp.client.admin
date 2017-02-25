@@ -13,8 +13,10 @@ export default {
       if (!this.moduleParent) {
         this.moduleParent = getClosestVueParent(this.$parent, 'gp-module');
       }
-      if (this.moduleParent && this.getPageId) {
-        this.moduleParent.currentPage = this.getPageId();
+
+      if (this.moduleParent && this.pageId !== undefined) {
+
+        this.moduleParent.currentPage = this.pageId;
       }
     },
     showLogon() {
@@ -22,9 +24,10 @@ export default {
     }
   },
   mounted() {
+
     this.registerModulePage();
     this.$nextTick(() => {
-      if (this.getPageId && this.moduleParent) {
+      if (this.pageId !== undefined && this.moduleParent) {
         this.moduleParent.setCurrentPageNav();
       }
     });
