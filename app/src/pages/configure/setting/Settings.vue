@@ -35,7 +35,11 @@
             <md-table-row v-for="(setting, index) in settings" :key="index">
               <md-table-cell>{{ setting.group }}</md-table-cell>
               <md-table-cell>{{ setting.option }}</md-table-cell>
-              <md-table-cell>{{ setting.value }}</md-table-cell>
+              <md-table-cell>
+                <md-plain-input
+                  :value="setting.value">
+                </md-plain-input>
+              </md-table-cell>
               <md-table-cell>{{ setting.description }}</md-table-cell>
               <md-table-cell>ttt</md-table-cell>
             </md-table-row>
@@ -65,7 +69,14 @@
     data: () => {
       return {
         pageId: 'settings',
-        settings: []
+        settings: [
+          {
+            group: 'ss',
+            option: 'ss',
+            value: 'ss',
+            description: 'ss'
+          }
+        ]
       };
     },
     computed: {

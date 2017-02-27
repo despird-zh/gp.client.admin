@@ -1,8 +1,8 @@
 <template>
-  <div class="gp-logon">
+  <div>
     <md-dialog ref="logonDialog"
       :md-click-outside-to-close="!modalMode"
-      :md-esc-to-close="!modalMode">
+      :md-esc-to-close="!modalMode" class="gp-logon">
       <md-dialog-title>Welcome to Groupress</md-dialog-title>
 
       <md-dialog-content>

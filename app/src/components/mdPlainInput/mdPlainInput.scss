@@ -1,0 +1,46 @@
+@import '../../assets/styles/mdl-variables.scss';
+
+$input-size: 32px;
+
+.gp-input {
+  width: 100%;
+  height: $input-size;
+  padding: 6px 12px;
+  display: block;
+  flex: 1;
+  border: none;
+  background: none;
+  transition: $swift-ease-out;
+  transition-property: font-size;
+  color: rgba(#000, .54);
+  font-family: inherit;
+  font-size: 12px;
+  line-height: $input-size;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+
+  &:focus {
+    outline: none;
+  }
+
+  &::-webkit-input-placeholder {
+    color: rgba(#000, .54);
+    font-size: 16px;
+    text-shadow: none;
+    -webkit-text-fill-color: initial;
+  }
+
+  &.md-input-invalid {
+    color: rgba(#000, .38);
+  }
+
+  &.md-input-disabled{
+    color: rgba(#000, .38);
+  }
+
+  &.md-input-focused{
+    color: rgba(#000, .54);
+  }
+}
+
