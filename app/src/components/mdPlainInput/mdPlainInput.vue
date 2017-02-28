@@ -33,7 +33,9 @@
       placeholder: String
     },
     data: () => {
-      isFocused: false;
+      return {
+        isFocused: false
+      };
     },
     computed: {
       classes() {
