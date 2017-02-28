@@ -7,8 +7,8 @@
 
         <div class="introduction">Build well-crafted apps with Material Design and Vue 2</div>
 
-        <md-button class="md-primary md-raised" @click.native="signin">Sign in</md-button>
-        <md-button class="md-primary md-raised" target="_blank" rel="noopener">Register</md-button>
+        <md-button v-if="!authenticated" class="md-primary md-raised" @click.native="signin">Sign in</md-button>
+        <md-button v-if="!authenticated" class="md-primary md-raised" target="_blank" rel="noopener">Register</md-button>
       </div>
 
       <div class="row">
@@ -80,10 +80,10 @@
 </style>
 
 <script>
-
+  import RpcMixin from '../../utils/rpcMixin';
   import routePage from '../common/RoutePage';
   export default {
-    mixins: [routePage],
+    mixins: [routePage, RpcMixin],
     data: function() {
       return {
         initialValue: 'Demo2 Value'
