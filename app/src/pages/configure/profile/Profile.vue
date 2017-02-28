@@ -54,10 +54,10 @@
 <style lang="scss" src="./Profile.scss"></style>
 
 <script>
-
+  import rpcMixin from '../../../utils/rpcMixin';
   import routePage from '../../common/RoutePage';
   export default {
-    mixins: [routePage],
+    mixins: [routePage, rpcMixin],
     data: function() {
       return {
         pageId: 'profile',

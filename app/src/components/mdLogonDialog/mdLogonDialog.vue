@@ -43,7 +43,8 @@
       modalMode: false
     }),
     computed: {
-      ...mapGetters(['jwttoken', 'subject', 'audience', 'baseUrl'])
+      ...mapGetters(['jwttoken', 'subject']),
+      ...mapGetters(['audience', 'baseUrl'])
     },
     methods: {
       ...mapActions(['saveJwtToken']),
@@ -63,7 +64,7 @@
         };
 
         this.$http.post(this.$httpUrl('authenticate.do'), body, options).then(
-        function(response) {
+        (response) => {
           let respdata = response.body;
 
           if (respdata.meta.state === 'success') {
@@ -72,7 +73,7 @@
           }
           this.message = respdata.meta.message;
           this.$refs.msgbar.open();
-        }, function(response) {
+        }, (response) => {
           if (response.ok) {
             this.message = '用户或密码错误，请重新登录。';
           } else {
