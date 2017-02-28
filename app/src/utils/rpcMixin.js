@@ -2,14 +2,14 @@ import { mapGetters, mapActions} from 'vuex';
 
 export default {
   computed: {
-    ...mapGetters(['jwttoken', 'subject', 'audience', 'baseUrl'])
+    ...mapGetters(['jwttoken', 'subject', 'audience', 'baseUrl', 'authenticated'])
   },
   methods: {
     ...mapActions(['saveJwtToken']),
-    $post(apiname, body, success, fail) {
+    $post(apiname, body) {
       let options = this.$httpOptions();
 
-      this.$http.post(this.$httpUrl(apiname), body, options).then(success, fail);
+      return this.$http.post(this.$httpUrl(apiname), body, options);
     },
     $httpOptions(options) {
       let httpOpts = options ? options : {};

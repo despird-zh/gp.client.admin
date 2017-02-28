@@ -1,6 +1,7 @@
 const SAVE_JWT_TOKEN = 'SAVE_JWT_TOKEN';
 const RESET_JWT_TOKEN = 'RESET_JWT_TOKEN';
 const SAVE_PRINCIPAL = 'SAVE_PRINCIPAL';
+const BLIND_TOKEN = '__blind_token__';
 
 export const types = {
   SAVE_JWT_TOKEN,
@@ -15,7 +16,7 @@ export const state = {
   principal: {
     subject: 'dev1',
     credential: '1',
-    jwttoken: '__blind_token__'
+    jwttoken: BLIND_TOKEN
   }
 };
 
@@ -28,5 +29,10 @@ export const mutations = {
   [SAVE_PRINCIPAL](state, {subject, password}) {
     state.principal.credential = password;
     state.principal.subject = subject;
+  },
+  [RESET_JWT_TOKEN](state) {
+    state.principal.subject = '';
+    state.principal.jwttoken = BLIND_TOKEN;
+    state.authenticated = false;
   }
 };

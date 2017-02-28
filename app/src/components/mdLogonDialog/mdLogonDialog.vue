@@ -32,22 +32,17 @@
 <style lang="scss" src="./mdLogonDialog.scss"></style>
 
 <script>
-  import httpOptions from '../../utils/jwtToken';
-  import { mapGetters, mapActions} from 'vuex';
+  import RpcMixin from '../../utils/rpcMixin';
+
   export default {
-    mixins: [httpOptions],
+    mixins: [RpcMixin],
     data: () => ({
       account: 'dev1',
       password: '1',
       message: '',
       modalMode: false
     }),
-    computed: {
-      ...mapGetters(['jwttoken', 'subject']),
-      ...mapGetters(['audience', 'baseUrl'])
-    },
     methods: {
-      ...mapActions(['saveJwtToken']),
       showLogon() {
         this.$refs.logonDialog.open();
       },
@@ -55,7 +50,6 @@
         this.$refs.logonDialog.close();
       },
       submitLogon() {
-        let options = this.$httpOptions();
 
         let body = {
           principal: this.account,
@@ -63,17 +57,17 @@
           audience: this.audience
         };
 
-        this.$http.post(this.$httpUrl('authenticate.do'), body, options).then(
-        (response) => {
-          let respdata = response.body;
+        this.$post('authenticate.do', body).then(
+          (response) => {
+            let respdata = response.body;
 
-          if (respdata.meta.state === 'success') {
-            this.saveJwtToken({subject: this.account, jwttoken: respdata.data});
-            this.closeLogon();
-          }
-          this.message = respdata.meta.message;
-          this.$refs.msgbar.open();
-        }, (response) => {
+            if (respdata.meta.state === 'success') {
+              this.saveJwtToken({subject: this.account, jwttoken: respdata.data});
+              this.closeLogon();
+            }
+            this.message = respdata.meta.message;
+            this.$refs.msgbar.open();
+          }, (response) => {
           if (response.ok) {
             this.message = '用户或密码错误，请重新登录。';
           } else {

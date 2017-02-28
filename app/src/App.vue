@@ -26,8 +26,11 @@
           <md-button href="#/configure" class="md-icon-button">
             <md-icon>settings</md-icon>
           </md-button>
-          <md-button @click.native="logon()" class="md-icon-button">
+          <md-button @click.native="logon()" v-if="!authenticated" class="md-icon-button">
             <md-icon>open_in_browser</md-icon>
+          </md-button>
+          <md-button @click.native="logoff()" v-if="authenticated" class="md-icon-button">
+            <md-icon>open_in_new</md-icon>
           </md-button>
         </md-toolbar>
       </div>
@@ -51,7 +54,7 @@
 <script>
   import Vue from 'vue';
   import { modules } from './pages/routes.js';
-
+  import { mapGetters, mapActions} from 'vuex';
   export default {
     data() {
       return {
@@ -60,6 +63,7 @@
       };
     },
     computed: {
+      ...mapGetters(['authenticated']),
       logo() {
         return 'assets/images/logo-vue-material-' + Vue.material.currentTheme + '.png';
       },
@@ -68,8 +72,12 @@
       }
     },
     methods: {
+      ...mapActions(['resetJwtToken']),
       logon() {
         this.$refs.logonDialog.showLogon();
+      },
+      logoff() {
+        this.resetJwtToken();
       },
       reset() {
         console.log('the root is reseted');

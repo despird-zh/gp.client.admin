@@ -13,3 +13,7 @@ export const audience = (state) => {
 export const baseUrl = (state) => {
   return state.baseUrl;
 };
+
+export const authenticated = (state) => {
+  return state.authenticated;
+};
