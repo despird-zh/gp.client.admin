@@ -20,18 +20,23 @@
         </md-button>
       </md-toolbar>
       <md-layout md-gutter="16">
-        <md-table >
+        <md-table style="width: 100%">
           <md-table-header>
             <md-table-row>
               <md-table-head>Group</md-table-head>
               <md-table-head>Option Key</md-table-head>
-              <md-table-head md-numeric>Option Value</md-table-head>
+              <md-table-head>Option Value</md-table-head>
               <md-table-head>Description</md-table-head>
               <md-table-head>Operation</md-table-head>
             </md-table-row>
           </md-table-header>
 
           <md-table-body>
+            <md-table-row v-if="isEmpty">
+              <md-table-cell class="md-table-cell" colspan="5">
+                No result
+              </md-table-cell>
+            </md-table-row>
             <md-table-row v-for="(setting, key) in settings" :key="key">
               <md-table-cell>{{ setting.group }}</md-table-cell>
               <md-table-cell>{{ setting.option }}</md-table-cell>
@@ -49,6 +54,9 @@
           </md-table-body>
         </md-table>
       </md-layout>
+      <md-snackbar md-position="top center" ref="msgbar" md-duration="2000">
+        <span>{{ message }}</span>
+      </md-snackbar>
     </div>
 </template>
 
@@ -64,38 +72,35 @@
 </style>
 
 <script>
-  import httpOptions from '../../../utils/jwtToken';
-  import { mapGetters } from 'vuex';
+  import RpcMixin from '../../../utils/rpcMixin';
   import routePage from '../../common/RoutePage';
   export default {
-    mixins: [routePage, httpOptions],
+    mixins: [routePage, RpcMixin],
     data: () => {
       return {
         pageId: 'settings',
-        settings: {
-          11: {
-            group: 'ss',
-            option: 'ss',
-            value: 'ss',
-            description: 'ss'
-          }
-        },
-        changes: {}
+        settings: {},
+        changes: {},
+        message: ''
       };
     },
     computed: {
-      ...mapGetters(['jwttoken', 'subject', 'audience', 'baseUrl'])
+      isEmpty() {
+        return Object.keys(this.settings).length === 0;
+      }
     },
     methods: {
       onChangeValue(itemKey, newVal) {
         this.changes[itemKey] = newVal;
-        console.log(this.changes);
       },
       searchSetting() {
-        let options = this.$httpOptions();
-
-        this.$http.post(this.$httpUrl('sys-opts-query.do'), {group: 'BASIC'}, options).then(
-        function(response) {
+        if (!this.authenticated) {
+          this.message = 'Please logon system firstly.';
+          this.$refs.msgbar.open();
+          return;
+        }
+        this.$post('sys-opts-query.do', {group: 'BASIC'}).then(
+        (response) => {
           let data = response.body.data;
           let meta = response.body.meta;
 
@@ -105,10 +110,10 @@
               this.settings[data[i].option] = data[i];
             }
           } else {
-
-            console.log('----- fail ');
+            this.message = meta.message;
+            this.$refs.msgbar.open();
           }
-        }, function(response) {
+        }, (response) => {
           console.log('----- fail ');
           console.log(response);
         });
