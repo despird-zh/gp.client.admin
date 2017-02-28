@@ -1,7 +1,7 @@
 .THEME_NAME {
   .gp-input {
 
-    color: #{'PRIMARY-COLOR'};
+    color: #{'BACKGROUND-CONTRAST-0.54'};;
     text-shadow: 0 0 0 #{'BACKGROUND-CONTRAST'};
     
     &:focus {
@@ -10,10 +10,6 @@
 
     &::-webkit-input-placeholder {
       color: rgba(#000, .54);
-    }
-
-    &.md-input-invalid {
-      color: #{'BACKGROUND-CONTRAST-0.38'};
     }
 
     &.md-input-disabled{

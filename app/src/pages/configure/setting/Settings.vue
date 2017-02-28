@@ -23,25 +23,28 @@
         <md-table >
           <md-table-header>
             <md-table-row>
-              <md-table-head>Dessert (100g serving)</md-table-head>
-              <md-table-head md-numeric>Calories (g)</md-table-head>
-              <md-table-head md-numeric>Fat (g)</md-table-head>
-              <md-table-head md-numeric>Carbs (g)</md-table-head>
-              <md-table-head md-numeric>Protein (g)</md-table-head>
+              <md-table-head>Group</md-table-head>
+              <md-table-head>Option Key</md-table-head>
+              <md-table-head md-numeric>Option Value</md-table-head>
+              <md-table-head>Description</md-table-head>
+              <md-table-head>Operation</md-table-head>
             </md-table-row>
           </md-table-header>
 
           <md-table-body>
-            <md-table-row v-for="(setting, index) in settings" :key="index">
+            <md-table-row v-for="(setting, key) in settings" :key="key">
               <md-table-cell>{{ setting.group }}</md-table-cell>
               <md-table-cell>{{ setting.option }}</md-table-cell>
               <md-table-cell>
                 <md-plain-input
-                  :value="setting.value">
+                  :value="setting.value"
+                  @change="onChangeValue(key, $event)">
                 </md-plain-input>
               </md-table-cell>
               <md-table-cell>{{ setting.description }}</md-table-cell>
-              <md-table-cell>ttt</md-table-cell>
+              <md-table-cell>
+                xxx
+              </md-table-cell>
             </md-table-row>
           </md-table-body>
         </md-table>
@@ -69,20 +72,25 @@
     data: () => {
       return {
         pageId: 'settings',
-        settings: [
-          {
+        settings: {
+          11: {
             group: 'ss',
             option: 'ss',
             value: 'ss',
             description: 'ss'
           }
-        ]
+        },
+        changes: {}
       };
     },
     computed: {
       ...mapGetters(['jwttoken', 'subject', 'audience', 'baseUrl'])
     },
     methods: {
+      onChangeValue(itemKey, newVal) {
+        this.changes[itemKey] = newVal;
+        console.log(this.changes);
+      },
       searchSetting() {
         let options = this.$httpOptions();
 
@@ -91,11 +99,11 @@
           let data = response.body.data;
           let meta = response.body.meta;
 
-          console.log(meta);
           if (meta.state === 'success') {
-            console.log('----- ok ');
-            this.settings = data;
-
+            this.settings = {};
+            for ( let i = 0; i < data.length; i++) {
+              this.settings[data[i].option] = data[i];
+            }
           } else {
 
             console.log('----- fail ');

@@ -8,7 +8,7 @@
     :placeholder="placeholder"
     :maxlength="maxlength"
     @focus="onFocus"
-    @blue="onBlur"
+    @blur="onBlur"
     @input="onInput"
     @keydown.up="onInput"
     @keydown.down="onInput">
