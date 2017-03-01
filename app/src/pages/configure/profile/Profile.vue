@@ -3,7 +3,7 @@
       <md-toolbar class="md-transparent gp-toolbar">
         <md-chip >由XXX于2017-5-6 11:11:22 最后更新</md-chip>
         <div class="gp-spacer"></div>
-        <md-button class="md-raised">
+        <md-button class="md-raised" @click.native="refreshProfile">
           <md-icon>cached</md-icon>
         </md-button>
         <md-button class="md-raised md-warn">
@@ -64,8 +64,21 @@
         initialValue: 'a'
       };
     },
-    props: {
-      name: String
+    methods: {
+      refreshProfile() {
+        this.$post('ent-profile-query.do', {}).then(
+          (response) => {
+            let data = response.body.data;
+            let meta = response.body.meta;
+
+            console.log(data);
+            console.log(meta);
+          },
+          (response) => {
+            console.log(response);
+          }
+        );
+      }
     }
   };
 </script>
