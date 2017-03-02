@@ -14,33 +14,46 @@
         <md-layout md-flex="80">
           <form novalidate @submit.stop.prevent="submit" class="profile-form">
             <md-input-container>
-              <label>Initial value</label>
-              <md-input v-model="initialValue"></md-input>
-            </md-input-container>
-
-            <md-input-container>
-              <label>With label</label>
-              <md-input placeholder="My nice placeholder"></md-input>
-            </md-input-container>
-
-            <md-input-container md-inline>
-              <label>Inline field</label>
+              <label>Entity Code</label>
               <md-input></md-input>
             </md-input-container>
 
             <md-input-container>
-              <label>Number</label>
-              <md-input type="number"></md-input>
+              <label>Node Code</label>
+              <md-input placeholder="My nice placeholder"></md-input>
+            </md-input-container>
+
+            <md-input-container md-inline>
+              <label>Abbreviation</label>
+              <md-input></md-input>
             </md-input-container>
 
             <md-input-container>
-              <label>Textarea</label>
+              <label>Name</label>
+              <md-input type="number"></md-input>
+            </md-input-container>
+            <md-input-container>
+              <label>Short Name</label>
+              <md-input type="number"></md-input>
+            </md-input-container>
+            <md-input-container>
+              <label>Description</label>
               <md-textarea></md-textarea>
             </md-input-container>
 
             <md-input-container>
-              <label>Disabled</label>
-              <md-input disabled></md-input>
+              <label>Administrator</label>
+              <md-input></md-input>
+            </md-input-container>
+
+            <md-input-container>
+              <label>Service Url</label>
+              <md-input></md-input>
+            </md-input-container>
+
+            <md-input-container>
+              <label>Binary Url</label>
+              <md-input></md-input>
             </md-input-container>
           </form>
         </md-layout>
@@ -48,6 +61,9 @@
           页面展示相关的说明信息
         </md-layout>
       </md-layout>
+      <md-snackbar md-position="top center" ref="msgbar" md-duration="2000">
+        <span>{{ message }}</span>
+      </md-snackbar>
     </div>
 </template>
 
@@ -58,10 +74,10 @@
   import routePage from '../../common/RoutePage';
   export default {
     mixins: [routePage, rpcMixin],
-    data: function() {
+    data: () => {
       return {
         pageId: 'profile',
-        initialValue: 'a'
+        message: ''
       };
     },
     methods: {
@@ -71,8 +87,11 @@
             let data = response.body.data;
             let meta = response.body.meta;
 
-            console.log(data);
-            console.log(meta);
+            this.message = meta.message;
+            if (meta.state === 'success') {
+              console.log(data);
+            }
+            this.$refs.msgbar.open();
           },
           (response) => {
             console.log(response);
