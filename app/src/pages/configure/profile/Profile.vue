@@ -6,7 +6,7 @@
         <md-button class="md-raised" @click.native="refreshProfile">
           <md-icon>cached</md-icon>
         </md-button>
-        <md-button class="md-raised md-warn">
+        <md-button class="md-raised md-warn" @click.native="saveProfile">
           <md-icon>save</md-icon>
         </md-button>
       </md-toolbar>
@@ -116,6 +116,24 @@
               console.log(data);
               this.profile = data;
             }
+            this.$refs.msgbar.open();
+          },
+          (response) => {
+            console.log(response);
+          }
+        );
+      },
+      saveProfile() {
+        if (!this.authenticated) {
+          this.message = 'Please logon the system firstly';
+          this.$refs.msgbar.open();
+          return;
+        }
+        this.$post('ent-profile-save.do', this.profile).then(
+          (response) => {
+            let meta = response.body.meta;
+
+            this.message = meta.message;
             this.$refs.msgbar.open();
           },
           (response) => {
