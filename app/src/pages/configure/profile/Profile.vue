@@ -1,7 +1,7 @@
 <template>
     <div class="gp-profile md-p">
       <md-toolbar class="md-transparent gp-toolbar">
-        <md-chip >由XXX于2017-5-6 11:11:22 最后更新</md-chip>
+        <md-chip v-if="modifyLabel">{{ modifyLabel }}</md-chip>
         <div class="gp-spacer"></div>
         <md-button class="md-raised" @click.native="refreshProfile">
           <md-icon>cached</md-icon>
@@ -13,47 +13,57 @@
       <md-layout md-gutter="16">
         <md-layout md-flex="80">
           <form novalidate @submit.stop.prevent="submit" class="profile-form">
+          <md-layout md-gutter="16">
+            <md-layout>
             <md-input-container>
               <label>Entity Code</label>
-              <md-input></md-input>
+              <md-input v-model="profile.entityCode" placeholder="the entity code"></md-input>
             </md-input-container>
-
+            </md-layout>
+            <md-layout>
             <md-input-container>
               <label>Node Code</label>
-              <md-input placeholder="My nice placeholder"></md-input>
+              <md-input v-model="profile.nodeCode" placeholder="My nice placeholder"></md-input>
             </md-input-container>
-
-            <md-input-container md-inline>
-              <label>Abbreviation</label>
-              <md-input></md-input>
-            </md-input-container>
-
+            </md-layout>
+          </md-layout>
+          <md-layout md-gutter="16">
+          <md-layout>
             <md-input-container>
-              <label>Name</label>
-              <md-input type="number"></md-input>
+              <label>Abbreviation</label>
+              <md-input v-model="profile.abbr"></md-input>
             </md-input-container>
+          </md-layout>
+          <md-layout>
             <md-input-container>
               <label>Short Name</label>
-              <md-input type="number"></md-input>
+              <md-input v-model="profile.shortName"></md-input>
             </md-input-container>
+          </md-layout>
+          </md-layout>
+            <md-input-container>
+              <label>Name</label>
+              <md-input v-model="profile.name"></md-input>
+            </md-input-container>
+            
             <md-input-container>
               <label>Description</label>
-              <md-textarea></md-textarea>
+              <md-textarea v-model="profile.description"></md-textarea>
             </md-input-container>
 
             <md-input-container>
               <label>Administrator</label>
-              <md-input></md-input>
+              <md-input v-model="profile.admin"></md-input>
             </md-input-container>
 
             <md-input-container>
               <label>Service Url</label>
-              <md-input></md-input>
+              <md-input v-model="profile.serviceUrl"></md-input>
             </md-input-container>
 
             <md-input-container>
               <label>Binary Url</label>
-              <md-input></md-input>
+              <md-input v-model="profile.binaryUrl"></md-input>
             </md-input-container>
           </form>
         </md-layout>
@@ -77,11 +87,25 @@
     data: () => {
       return {
         pageId: 'profile',
-        message: ''
+        message: '',
+        profile: {}
       };
+    },
+    computed: {
+      modifyLabel() {
+        if (Object.keys(this.profile).length !== 0) {
+          return this.profile.lastModified + ' modified by ' + this.profile.modifier;
+        }
+        return false;
+      }
     },
     methods: {
       refreshProfile() {
+        if (!this.authenticated) {
+          this.message = 'Please logon firstly';
+          this.$refs.msgbar.open();
+          return;
+        }
         this.$post('ent-profile-query.do', {}).then(
           (response) => {
             let data = response.body.data;
@@ -90,6 +114,7 @@
             this.message = meta.message;
             if (meta.state === 'success') {
               console.log(data);
+              this.profile = data;
             }
             this.$refs.msgbar.open();
           },
@@ -97,6 +122,11 @@
             console.log(response);
           }
         );
+      }
+    },
+    mounted() {
+      if (this.authenticated) {
+        this.refreshProfile();
       }
     }
   };
