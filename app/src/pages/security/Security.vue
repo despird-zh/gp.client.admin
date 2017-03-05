@@ -6,7 +6,8 @@
             :id="pageId" 
             :md-label="pageInfo.label" 
             :md-icon="pageInfo.icon" 
-            :md-link="pageInfo.link">
+            :md-link="pageInfo.link"
+            :md-tooltip="pageInfo.description">
             <h3>{{ pageInfo.title }}
               <small>{{ pageInfo.description }}</small>
             </h3>
@@ -24,17 +25,24 @@
       pageInfos: {
         users: {
           icon: 'person',
-          label: 'Users',
+          label: 'Persion',
           title: 'User Account',
           description: 'Maintein the accounts',
           link: '#/security/users'
         },
         groups: {
           icon: 'people',
-          label: 'Groups',
+          label: 'Group',
           title: 'User Group',
           description: 'Maintein the groups',
           link: '#/security/groups'
+        },
+        entitis: {
+          icon: 'save',
+          label: 'Entity',
+          title: 'Entitiy List',
+          description: 'Maintein the entities',
+          link: '#/security/entities'
         }
       }
     }),

@@ -9,7 +9,8 @@
             :id="pageId" 
             :md-label="pageInfo.label" 
             :md-icon="pageInfo.icon" 
-            :md-link="pageInfo.link">
+            :md-link="pageInfo.link"
+            :md-tooltip="pageInfo.description">
             <h3>{{ pageInfo.title }}
               <small>{{ pageInfo.description }}</small>
             </h3>

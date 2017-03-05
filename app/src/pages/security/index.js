@@ -1,6 +1,7 @@
 import Security from './Security';
 import Groups from './group/Groups';
 import Users from './user/Users';
+import Entities from './entity/Entities';
 
 export default {
   routes: [
@@ -14,7 +15,8 @@ export default {
         { path: 'users', component: Users, name: 'Users'},
 
         // components rendered at /parent/bar: Root -> Parent -> Bar
-        { path: 'groups', component: Groups, name: 'Groups'}
+        { path: 'groups', component: Groups, name: 'Groups'},
+        { path: 'entities', component: Entities, name: 'Entities'}
       ]
     }
   ]

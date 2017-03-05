@@ -42,7 +42,7 @@ html,body,div {
     }
 
     > .content{
-        margin-top: $header-height;
+        padding-top: $header-height;
         margin-bottom: $footer-height;
         position: relative; /* or static */
         z-index:1;
