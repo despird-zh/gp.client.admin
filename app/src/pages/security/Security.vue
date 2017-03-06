@@ -37,7 +37,7 @@
           description: 'Maintein the groups',
           link: '#/security/groups'
         },
-        entitis: {
+        entities: {
           icon: 'save',
           label: 'Entity',
           title: 'Entitiy List',

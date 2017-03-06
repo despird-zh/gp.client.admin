@@ -56,21 +56,22 @@
 </style>
 
 <script>
-  const PAGE_ID = 'users';
 
   import routePage from '../../common/RoutePage';
+  import RpcMixin from '../../../utils/rpcMixin';
   export default {
-    mixins: [routePage],
+    mixins: [routePage, RpcMixin],
     data: () => {
-      return {};
-    },
-    props: {
-      name: String
+      return {
+        pageId: 'users',
+        users: {
+          '001': {
+            
+          }
+        }
+      };
     },
     methods: {
-      getPageId() {
-        return PAGE_ID;
-      }
     }
   };
 </script>
