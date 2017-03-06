@@ -11,3 +11,5 @@ Vue.material.styles.push(MdExtTheme);
 Vue.use(PageNavsbar);
 Vue.use(LogonDialog);
 Vue.use(PlainInput);
+// prepare the vue-resource intercepters
+

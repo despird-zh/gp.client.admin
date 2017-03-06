@@ -3,17 +3,26 @@
       <md-toolbar class="md-transparent gp-toolbar">
         <md-input-container style="width:200px;margin-right:20px;">
           <label for="filterkey">Name</label>
-          <md-input ref="filterkey" id="filterkey" placeholder="Search..."/>
-          <md-button class="md-icon-button md-xmini" @click.native="$refs.filterkey.value=false">
+          <md-input ref="filterkey" id="filterkey" placeholder="Search..." v-model="filterkey"/>
+          <md-button class="md-icon-button md-xmini" @click.native="$refs.filterkey.value=''">
             <md-icon>clear</md-icon>
           </md-button>
         </md-input-container>
         <md-input-container style="width:150px;">
           <label for="state">State</label>
-          <md-select name="state" id="state" md-menu-class="select-menu">
-            <md-option value="active">Active</md-option>
-            <md-option value="frozen">Frozen</md-option>
-            <md-option value="deactive">Deactive</md-option>
+          <md-select name="state" id="state" v-model="state">
+            <md-option value="ALL">All</md-option>
+            <md-option value="ACTIVE">Active</md-option>
+            <md-option value="FROZEN">Frozen</md-option>
+            <md-option value="DEACTIVE">Deactive</md-option>
+          </md-select>
+        </md-input-container>
+        <md-input-container style="width:150px;">
+          <label for="type">Type</label>
+          <md-select name="type" id="type" v-model="type">
+            <md-option value="ALL">All</md-option>
+            <md-option value="INTERNAL">Internal</md-option>
+            <md-option value="EXTERNAL">External</md-option>
           </md-select>
         </md-input-container>
         <div class="gp-spacer"></div>
@@ -48,11 +57,6 @@
 </template>
 
 <style lang="scss" scoped>
-
-    .select-menu{
-      margin-left: 20px;
-    }
-
 </style>
 
 <script>
@@ -64,14 +68,52 @@
     data: () => {
       return {
         pageId: 'users',
+        filterkey: '',
+        state: 'ALL',
+        type: 'ALL',
         users: {
           '001': {
-            
+
           }
         }
       };
     },
     methods: {
+      getSearchCond() {
+        return {
+          filterkey: this.filterkey,
+          state: this.state,
+          type: this.type
+        };
+      },
+      searchUsers() {
+        console.log(this.getSearchCond());
+        if (!this.authenticated) {
+          this.message = 'Please logon system firstly.';
+          this.$refs.msgbar.open();
+          return;
+        }
+
+        /*this.$post('users-query.do', this.getSearchCond()).then(
+        (response) => {
+          let data = response.body.data;
+          let meta = response.body.meta;
+
+          if (meta.state === 'success') {
+            this.settings = {};
+            for ( let i = 0; i < data.length; i++) {
+              this.settings[data[i].option] = data[i];
+            }
+          } else {
+            this.message = meta.message;
+            this.$refs.msgbar.open();
+          }
+        }, (response) => {
+          console.log('----- fail ');
+          console.log(response);
+        });*/
+
+      }
     }
   };
 </script>
