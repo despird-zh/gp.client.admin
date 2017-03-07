@@ -78,12 +78,6 @@
           this.$refs.msgbar.open();
           console.log(response);
         });
-      },
-      onOpen() {
-        console.log('Opened');
-      },
-      onClose(type) {
-        console.log('Closed', type);
       }
     }
   };
