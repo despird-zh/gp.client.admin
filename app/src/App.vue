@@ -46,6 +46,9 @@
       </div>
     </md-whiteframe>
     <md-logon ref="logonDialog"></md-logon>
+    <md-snackbar md-position="top center" ref="msgbar" md-duration="2000">
+      <span>{{ message }}</span>
+    </md-snackbar>
   </div>
 </template>
 
@@ -59,7 +62,8 @@
     data() {
       return {
         pageTitle: '',
-        embedSidenav: false
+        embedSidenav: false,
+        message: ''
       };
     },
     computed: {
@@ -81,6 +85,10 @@
       },
       reset() {
         console.log('the root is reseted');
+      },
+      showMessage(message) {
+        this.message = message;
+        this.$refs.msgbar.open();
       }
     }
   };

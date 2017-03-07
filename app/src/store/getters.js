@@ -1,4 +1,4 @@
-import JwtDecode from 'jwt-decode';
+import jwtDecode from 'jwt-decode';
 // get original token
 export const jwttoken = (state) => {
   return state.principal.jwttoken;
@@ -19,14 +19,14 @@ export const audience = (state) => {
 export const baseUrl = (state) => {
   return state.baseUrl;
 };
-// get authencate state true: pass; false not valid 
+// get authencate state true: pass; false not valid
 export const authenticated = (state) => {
   return state.authenticated;
 };
 // get the parsed token
 export const parseToken = (state) => {
   let origin = state.principal.jwttoken;
-  let decoded = JwtDecode(origin);
+  let decoded = jwtDecode(origin);
 
   return decoded;
 };

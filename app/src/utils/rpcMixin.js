@@ -2,21 +2,29 @@ import { mapGetters, mapActions} from 'vuex';
 
 export default {
   computed: {
-    ...mapGetters(['jwttoken', 'subject', 'principal', 'parseToken', 'baseUrl', 'authenticated'])
+    ...mapGetters(['jwttoken', 'subject', 'audience', 'principal', 'parseToken', 'baseUrl', 'authenticated'])
   },
   methods: {
-    ...mapActions(['saveJwtToken']),
+    ...mapActions(['saveJwtToken', 'savePrincipal']),
     $post(apiname, body) {
       let options = this.$httpOptions();
+      let promise = this.$checkToken();
 
-      return this.$http.post(this.$httpUrl(apiname), body, options);
+      if (this.authenticated && !promise) {
+
+        promise.then(() => {
+          return this.$http.post(this.$httpUrl(apiname), body, options);
+        });
+      }
+
     },
     $httpOptions(options) {
       let httpOpts = options ? options : {};
 
       if (this.jwttoken) {
         httpOpts['headers'] = {
-          'Authorization': 'Bearer: ' + this.jwttoken
+          Authorization: 'Bearer: ' + this.jwttoken,
+          Accept: 'application/json'
         };
       }
       return httpOpts;
@@ -25,49 +33,72 @@ export default {
 
       return this.baseUrl + url;
     },
-    $refreshToken() {
-      return new Promise((resolve, reject) => {
-            //Refresh token
-            let _options = {
-              headers: {
-                'Authorization': 'Bearer: ' + this.jwttoken
-              }
-            };
+    $checkToken() {
 
-            Vue.http({url: this.$httpUrl('reissue.do'), options: _options}).then( (response) => {
-                //Store refreshed token
-                localStorage.setItem('id_token', response.data.token);
-                //Resubmit original request and resolve the response (probably shouldn't be the responsibility of the Auth service...)
-                Vue.http(request).then(function (newResponse) {
-                    resolve(newResponse);
-                });
-            }, function (newResponse) {
-                reject(newResponse);
-            });
+      let parseToken = this.parseToken;
+      let currTimestamp = Math.floor(Date.now() / 1000);
+
+      if (currTimestamp - parseToken.exp < 5 * 60 && currTimestamp - parseToken.exp > 0) {
+        // use promise to chain up the process.
+        return new Promise((resolve, reject) => {
+          // prepare the options to reissue the token;
+          let _options = this.$httpOptions();
+
+          this.$http.get({url: this.$httpUrl('reissue.do'), options: _options}).then(
+            (response) => {
+              let respdata = response.data;
+              let respmeta = response.meta;
+
+              if (respmeta.state === 'success') {
+                this.saveJwtToken({subject: this.account, jwttoken: respdata.data});
+                resolve();
+              } else {
+                this.$root.showMessage(respmeta.message);
+                reject();
+              }
+            },
+            (response) => {
+              if (response.ok) {
+                this.$root.showMessage('fail to reissue token');
+              } else {
+                this.$root.showMessage('fail to connect');
+              }
+              reject();
+            }
+          );
         });
+      } else if (currTimestamp - parseToken.exp >= 5 * 60) {
+        let authenBody = {
+          principal: this.principal.subject,
+          credential: this.principal.credential,
+          audience: this.audience
+        };
+
+        return this.$logon(authenBody);
+      }
+
+        // token is valid
+      return true;
+
+
+    },
+    $logon(authenBody) {
+      return new Promise((resolve, reject) => {
+        this.$post(this.$httpUrl('authenticate.do'), authenBody).then(
+          (response) => {
+            let respdata = response.body;
+
+            if (respdata.meta.state === 'success') {
+              this.saveJwtToken({subject: this.account, jwttoken: respdata.data});
+              this.savePrincipal({subject: this.account, password: this.password});
+            }
+            resolve(response);
+          }, (response) => {
+          reject(response);
+        }
+        );
+      });
     }
   }
 };
 //https://laracasts.com/discuss/channels/vue/jwt-auth-with-vue-resource-interceptor
-//define the VueResource intercepters
-Vue.http.interceptors.push(function (request, next) {
-    // 
-    if(this.authenticated){
-      //Add JWT to all requests
-      request.headers.set('Authorization', 'Bearer: ' + this.jwttoken);
-    }
-    request.headers.set('Accept', 'application/json');
-
-    //Skip storing token refresh requests
-    next( (response) => {
-        //Check for expired token response, if expired, refresh token and resubmit original request
-        let respdata = response.body;
-
-        if(respdata.meta.code === 'TOKEN_EXPIRED'){
-
-        }
-        auth.checkExpiredToken(response, request).then(function(response) {
-            return response;
-        })
-    });
-});

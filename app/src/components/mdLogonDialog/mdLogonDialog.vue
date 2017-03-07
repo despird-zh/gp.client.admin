@@ -57,27 +57,25 @@
           audience: this.audience
         };
 
-        this.$post('authenticate.do', body).then(
+        this.$logon( body).then(
           (response) => {
             let respdata = response.body;
 
             if (respdata.meta.state === 'success') {
-              this.saveJwtToken({subject: this.account, jwttoken: respdata.data});
-              this.savePrincipal({subject: this.account, password: this.password});
               this.closeLogon();
             }
             this.message = respdata.meta.message;
             this.$refs.msgbar.open();
-          }, (response) => {
-          if (response.ok) {
-            this.message = '用户或密码错误，请重新登录。';
-          } else {
-            this.message = '服务器连接失败，请确认网络正常。';
-            this.closeLogon();
-          }
-          this.$refs.msgbar.open();
-          console.log(response);
-        });
+          },
+          (response) => {
+            if (response.ok) {
+              this.message = '用户或密码错误，请重新登录。';
+            } else {
+              this.message = '服务器连接失败，请确认网络正常。';
+              this.closeLogon();
+            }
+            this.$refs.msgbar.open();
+          });
       }
     }
   };
