@@ -6,6 +6,10 @@ export const subject = (state) => {
   return state.principal.subject;
 };
 
+export const principal = (state) => {
+  return state.principal;
+};
+
 export const audience = (state) => {
   return state.audience;
 };

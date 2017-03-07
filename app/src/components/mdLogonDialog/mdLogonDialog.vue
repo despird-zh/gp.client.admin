@@ -63,6 +63,7 @@
 
             if (respdata.meta.state === 'success') {
               this.saveJwtToken({subject: this.account, jwttoken: respdata.data});
+              this.savePrincipal({subject: this.account, password: this.password});
               this.closeLogon();
             }
             this.message = respdata.meta.message;
