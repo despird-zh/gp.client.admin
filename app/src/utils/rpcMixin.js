@@ -2,7 +2,7 @@ import { mapGetters, mapActions} from 'vuex';
 
 export default {
   computed: {
-    ...mapGetters(['jwttoken', 'subject', 'principal', 'audience', 'baseUrl', 'authenticated'])
+    ...mapGetters(['jwttoken', 'subject', 'principal', 'parseToken', 'baseUrl', 'authenticated'])
   },
   methods: {
     ...mapActions(['saveJwtToken']),
