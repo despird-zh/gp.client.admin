@@ -56,8 +56,10 @@
           credential: this.password,
           audience: this.audience
         };
-
-        this.$logon( body).then(
+        let a = this.$logon(body);
+  
+        console.log(a);
+        a.then(
           (response) => {
             let respdata = response.body;
 

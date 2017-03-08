@@ -30,3 +30,17 @@ export const parseToken = (state) => {
 
   return decoded;
 };
+// get token state
+export const tokenState = (state) => {
+
+  let parseToken = jwtDecode(state.principal.jwttoken);
+  let currTimestamp = Math.floor(Date.now() / 1000);
+
+  if (currTimestamp - parseToken.exp < 5 * 60 && currTimestamp - parseToken.exp > 0) {
+    return 'TO_BE_EXPIRE';
+  } else if (currTimestamp - parseToken.exp >= 5 * 60) {
+    return 'EXPIRED';
+  }
+  return 'NORMAL';
+
+};
