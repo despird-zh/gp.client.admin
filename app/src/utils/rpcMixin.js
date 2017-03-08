@@ -13,13 +13,19 @@ export default {
         let _tokenState = this.tokenState();
 
         if ( _tokenState === 'TO_BE_EXPIRE' ) {
+
           return this.$reissueTokenCall(apiname, body);
         } else if ( _tokenState === 'EXPIRED' ) {
+
           return this.$reLogonCall(apiname, body);
         }
+
         return this.$http.post(this.$httpUrl(apiname), body, _options);
+
       }
+
       this.$root.showMessage('Please logon firstly');
+
     },
     $httpOptions(options) {
       let httpOpts = options ? options : {};
@@ -69,7 +75,7 @@ export default {
             }
           }
         );
-      }.bind(this));
+      }, this );
     },
     $reLogonCall(apiname, body) {
       return new Promise(function(resolve, reject) {
@@ -79,7 +85,7 @@ export default {
           audience: this.audience
         };
 
-        this.$post(this.$httpUrl('authenticate.do'), authenBody).then(
+        this.$http.post(this.$httpUrl('authenticate.do'), authenBody).then(
           (response) => {
             let respdata = response.body;
 
@@ -104,11 +110,11 @@ export default {
             this.$root.showMessage('fail to connect');
           }
         });
-      }.bind(this));
+      }, this );
     },
     $logon(authenBody) {
-      return new Promise(function(resolve, reject) {
-        this.$post(this.$httpUrl('authenticate.do'), authenBody).then(
+      return new Promise((resolve, reject) => {
+        this.$http.post(this.$httpUrl('authenticate.do'), authenBody).then(
           (response) => {
             let respdata = response.body;
 
@@ -120,7 +126,7 @@ export default {
           }, (response) => {
           reject(response);
         });
-      }.bind(this));
+      });
     }
   }
 };
