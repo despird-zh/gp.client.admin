@@ -130,4 +130,3 @@ export default {
     }
   }
 };
-//https://laracasts.com/discuss/channels/vue/jwt-auth-with-vue-resource-interceptor
