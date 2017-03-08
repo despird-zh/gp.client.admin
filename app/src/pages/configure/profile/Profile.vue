@@ -113,7 +113,7 @@
 
             this.message = meta.message;
             if (meta.state === 'success') {
-              console.log(data);
+
               this.profile = data;
             }
             this.$refs.msgbar.open();

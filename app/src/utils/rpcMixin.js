@@ -9,8 +9,8 @@ export default {
     $post(apiname, body) {
       let _options = this.$httpOptions();
 
-      if (this.authenticate) {
-        let _tokenState = this.tokenState();
+      if (this.authenticated) {
+        let _tokenState = this.tokenState;
 
         if ( _tokenState === 'TO_BE_EXPIRE' ) {
 
@@ -18,14 +18,14 @@ export default {
         } else if ( _tokenState === 'EXPIRED' ) {
 
           return this.$relogonCall(apiname, body);
-        }else {
-
-          return this.$http.post(this.$httpUrl(apiname), body, _options);
         }
-      }else{
-        
-        this.$root.showMessage('Please logon firstly');
+
+        return this.$http.post(this.$httpUrl(apiname), body, _options);
+
       }
+
+      this.$root.showMessage('Please logon firstly');
+
     },
     $httpOptions(options) {
       let httpOpts = options ? options : {};
@@ -44,16 +44,15 @@ export default {
     },
     $reissueTokenCall(apiname, body) {
       // use promise to chain up the process.
-      return new Promise(function(resolve, reject) {
+      return new Promise((resolve, reject) => {
         // prepare the options to reissue the token;
         let _options = this.$httpOptions();
 
-        this.$http.get({url: this.$httpUrl('reissue.do'), options: _options}).then(
+        this.$http.get(this.$httpUrl('reissue.do'), _options).then(
           (response) => {
-            let respdata = response.data;
-            let respmeta = response.meta;
+            let respdata = response.body;
 
-            if (respmeta.state === 'success') {
+            if (respdata.meta.state === 'success') {
               this.saveJwtToken({subject: this.account, jwttoken: respdata.data});
               _options = this.$httpOptions();
               this.$http.post(this.$httpUrl(apiname), body, _options).then(
@@ -64,7 +63,7 @@ export default {
                   reject(response);
                 });
             } else {
-              this.$root.showMessage(respmeta.message);
+              this.$root.showMessage(respdata.meta.message);
             }
           },
           (response) => {
@@ -75,10 +74,10 @@ export default {
             }
           }
         );
-      }, this );
+      });
     },
     $relogonCall(apiname, body) {
-      return new Promise(function(resolve, reject) {
+      return new Promise((resolve, reject) => {
         let authenBody = {
           principal: this.principal.subject,
           credential: this.principal.credential,
@@ -92,16 +91,18 @@ export default {
             if (respdata.meta.state === 'success') {
               this.saveJwtToken({subject: this.account, jwttoken: respdata.data});
               this.savePrincipal({subject: this.account, password: this.password});
-            }
-            let _options = this.$httpOptions();
+              let _options = this.$httpOptions();
 
-            this.$http.post(this.$httpUrl(apiname), body, _options).then(
-                (response) => {
-                  resolve(response);
+              this.$http.post(this.$httpUrl(apiname), body, _options).then(
+                (newresponse) => {
+                  resolve(newresponse);
                 },
-                (response) => {
-                  reject(response);
+                (newresponse) => {
+                  reject(newresponse);
                 });
+            } else {
+              reject(response);
+            }
 
           }, (response) => {
           if (response.ok) {
@@ -110,7 +111,7 @@ export default {
             this.$root.showMessage('fail to connect');
           }
         });
-      }, this );
+      });
     },
     $logon(authenBody) {
       return new Promise((resolve, reject) => {
