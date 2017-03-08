@@ -64,6 +64,7 @@
   .gp-settings {
     .md-input-container{
       margin-right: 10px;
+      margin-bottom: 10px;
       &.md-input{
         font-size: 14px;
       }
