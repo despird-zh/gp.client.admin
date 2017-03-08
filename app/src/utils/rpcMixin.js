@@ -17,15 +17,15 @@ export default {
           return this.$reissueTokenCall(apiname, body);
         } else if ( _tokenState === 'EXPIRED' ) {
 
-          return this.$reLogonCall(apiname, body);
+          return this.$relogonCall(apiname, body);
+        }else {
+
+          return this.$http.post(this.$httpUrl(apiname), body, _options);
         }
-
-        return this.$http.post(this.$httpUrl(apiname), body, _options);
-
+      }else{
+        
+        this.$root.showMessage('Please logon firstly');
       }
-
-      this.$root.showMessage('Please logon firstly');
-
     },
     $httpOptions(options) {
       let httpOpts = options ? options : {};
@@ -77,7 +77,7 @@ export default {
         );
       }, this );
     },
-    $reLogonCall(apiname, body) {
+    $relogonCall(apiname, body) {
       return new Promise(function(resolve, reject) {
         let authenBody = {
           principal: this.principal.subject,
