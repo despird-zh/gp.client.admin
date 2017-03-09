@@ -124,7 +124,6 @@
           if (meta.state === 'success') {
             this.users = {};
             for ( let i = 0; i < data.length; i++) {
-              console.log(data[i]);
               this.users[data[i].infoId.id] = data[i];
             }
           }
