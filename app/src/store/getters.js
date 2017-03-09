@@ -42,8 +42,9 @@ const tokenState = (state) => {
   } else if (currTimestamp - parseToken.exp >= 5 * 60) {
     return 'EXPIRED';
   }
-  return 'NORMAL';
+  return 'EXPIRED';
 
 };
-// export getters as default 
+// export getters as default
+
 export default { jwttoken, subject, principal, audience, baseUrl, authenticated, parseToken, tokenState };

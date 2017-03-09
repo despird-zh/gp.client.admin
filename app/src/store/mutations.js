@@ -24,23 +24,21 @@ export const state = {
 export const mutations = {
   [SAVE_JWT_TOKEN](state, token) {
 
-    if(typeof jwttoken === "string") {
+    if (typeof token === 'string') {
       state.principal.jwttoken = token;
       state.authenticated = true;
-    }
-    else if(typeof jwttoken === "object") {
+    } else if (typeof token === 'object') {
       state.principal.subject = token.subject;
       state.principal.jwttoken = token.jwttoken;
       state.authenticated = true;
     }
-    
+
   },
   [SAVE_PRINCIPAL](state, credential) {
 
-    if(typeof jwttoken === "string") {
+    if (typeof credential === 'string') {
       state.principal.credential = credential;
-    }
-    else if(typeof jwttoken === "object") {
+    } else if (typeof credential === 'object') {
       state.principal.credential = credential.password;
       state.principal.subject = credential.subject;
     }
