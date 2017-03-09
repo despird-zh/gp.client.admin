@@ -42,7 +42,7 @@ const tokenState = (state) => {
   } else if (currTimestamp - parseToken.exp >= 5 * 60) {
     return 'EXPIRED';
   }
-  return 'EXPIRED';
+  return 'NORMAL';
 
 };
 // export getters as default
