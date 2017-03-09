@@ -111,4 +111,29 @@ const logon = ({ commit, state }, authenBody) => {
   });
 };
 
-export default {savePrincipal, saveJwtToken, resetJwtToken, reIssueToken, reFetchToken, logon};
+const logoff = ({ commit, state }) => {
+  return new Promise((resolve, reject) => {
+    let _options = {
+      headers: {
+        Authorization: 'Bearer: ' + state.principal.jwttoken,
+        Accept: 'application/json'
+      }
+    };
+    let _url = state.baseUrl + 'logoff.do';
+
+    Vue.http.get(_url, _options).then(
+      (response) => {
+        let respdata = response.body;
+
+        if (respdata.meta.state === 'success') {
+          commit(types.RESET_JWT_TOKEN);
+        }
+        resolve(response);
+      }, (response) => {
+      reject(response);
+    }
+    );
+  });
+};
+
+export default {savePrincipal, saveJwtToken, resetJwtToken, reIssueToken, reFetchToken, logon, logoff};

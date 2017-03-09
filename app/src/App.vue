@@ -81,7 +81,23 @@
         this.$refs.logonDialog.showLogon();
       },
       logoff() {
-        this.resetJwtToken();
+        this.$store.dispatch('logoff').then(
+          (response) => {
+            let respdata = response.body;
+  
+            this.showMessage(respdata.meta.message);
+          },
+          (response) => {
+            let message = '';
+
+            if (response.ok) {
+              message = '用户或密码错误，请重新登录。';
+            } else {
+              message = '服务器连接失败，请确认网络正常。';
+            }
+            this.showMessage(message);
+          }
+        );
       },
       reset() {
         console.log('the root is reseted');

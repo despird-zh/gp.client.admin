@@ -6,7 +6,7 @@ export default {
   },
   methods: {
     ...mapActions(['saveJwtToken', 'savePrincipal', 'resetJwtToken', 'reIssueToken', 'reFetchToken', 'logon']),
-    $post(apiName, requestBody) {
+    $post(apiName, requestBody, ) {
 
       if (this.authenticated) {
         let _tokenState = this.tokenState;
@@ -43,7 +43,18 @@ export default {
       return httpOpts;
     },
     $logon(authenBody) {
+
       return this.$store.dispatch('logon', authenBody);
+    },
+    $rejectTrap(response) {
+      let message = '';
+
+      if (response.ok) {
+        message = '用户或密码错误，请重新登录。';
+      } else {
+        message = '服务器连接失败，请确认网络正常。';
+      }
+      this.$root.showMessage(message);
     }
   }
 };
