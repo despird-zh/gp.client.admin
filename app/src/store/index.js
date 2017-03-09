@@ -10,6 +10,8 @@ import { state, mutations } from './mutations';
 Vue.use(Vuex);
 
 const debug = process.env.NODE_ENV !== 'production';
+const plugins = debug ? [createLogger(), stateCache] : [stateCache]
+
 
 export default new Vuex.Store({
   state,
@@ -18,7 +20,7 @@ export default new Vuex.Store({
   mutations,
   plugins: [
     createPersistedState({ storage: window.sessionStorage }),
-    createLogger()
+    ...plugins
   ],
   strict: debug
 });

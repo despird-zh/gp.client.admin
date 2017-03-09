@@ -1,37 +1,38 @@
 import jwtDecode from 'jwt-decode';
+
 // get original token
-export const jwttoken = (state) => {
+const jwttoken = (state) => {
   return state.principal.jwttoken;
 };
 // get subject
-export const subject = (state) => {
+const subject = (state) => {
   return state.principal.subject;
 };
 // get principal object {subject, password}
-export const principal = (state) => {
+const principal = (state) => {
   return state.principal;
 };
 // get the audience
-export const audience = (state) => {
+const audience = (state) => {
   return state.audience;
 };
 // get server base url
-export const baseUrl = (state) => {
+const baseUrl = (state) => {
   return state.baseUrl;
 };
 // get authencate state true: pass; false not valid
-export const authenticated = (state) => {
+const authenticated = (state) => {
   return state.authenticated;
 };
 // get the parsed token
-export const parseToken = (state) => {
+const parseToken = (state) => {
   let origin = state.principal.jwttoken;
   let decoded = jwtDecode(origin);
 
   return decoded;
 };
 // get token state
-export const tokenState = (state) => {
+const tokenState = (state) => {
 
   let parseToken = jwtDecode(state.principal.jwttoken);
   let currTimestamp = Math.floor(Date.now() / 1000);
@@ -44,3 +45,5 @@ export const tokenState = (state) => {
   return 'NORMAL';
 
 };
+// export getters as default 
+export default { jwttoken, subject, principal, audience, baseUrl, authenticated, parseToken, tokenState };

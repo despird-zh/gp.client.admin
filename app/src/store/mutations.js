@@ -22,14 +22,29 @@ export const state = {
 };
 // declare the mutations over state.
 export const mutations = {
-  [SAVE_JWT_TOKEN](state, {subject, jwttoken }) {
-    state.principal.subject = subject;
-    state.principal.jwttoken = jwttoken;
-    state.authenticated = true;
+  [SAVE_JWT_TOKEN](state, token) {
+
+    if(typeof jwttoken === "string") {
+      state.principal.jwttoken = token;
+      state.authenticated = true;
+    }
+    else if(typeof jwttoken === "object") {
+      state.principal.subject = token.subject;
+      state.principal.jwttoken = token.jwttoken;
+      state.authenticated = true;
+    }
+    
   },
-  [SAVE_PRINCIPAL](state, {subject, password}) {
-    state.principal.credential = password;
-    state.principal.subject = subject;
+  [SAVE_PRINCIPAL](state, credential) {
+
+    if(typeof jwttoken === "string") {
+      state.principal.credential = credential;
+    }
+    else if(typeof jwttoken === "object") {
+      state.principal.credential = credential.password;
+      state.principal.subject = credential.subject;
+    }
+
   },
   [RESET_JWT_TOKEN](state) {
     state.principal.subject = '';
