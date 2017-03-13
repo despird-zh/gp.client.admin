@@ -1,7 +1,7 @@
 /**
  * the common method of route page
 **/
-import getClosestVueParent from '../../utils/getClosestVueParent';
+import getClosestVueParent from 'vue-material/src/core/utils/getClosestVueParent';
 export default {
   data: () => {
     return {

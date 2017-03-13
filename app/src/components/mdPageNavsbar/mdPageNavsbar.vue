@@ -28,8 +28,8 @@
 <style lang="scss" src="./mdPageNavsbar.scss"></style>
 
 <script>
-  import themeMixin from '../../utils/themeMixin';
-  import throttle from '../../utils/throttle';
+  import themeMixin from 'vue-material/src/core/components/mdTheme/mixin';
+  import throttle from 'vue-material/src/core/utils/throttle';
 
   export default {
     props: {

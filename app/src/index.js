@@ -21,6 +21,7 @@ const router = new VueRouter({
   routes
 });
 // preset theme of material library and customized components theme, i.e SearchBox etc.
+
 presetTheme();
 // load the main page component(root)
 let GPressMain = Vue.component('gpress-main', App);

@@ -17,7 +17,7 @@
 <style lang="scss" src="./mdPlainInput.scss"></style>
 
 <script>
-  import themeMixin from '../../utils/themeMixin';
+  import themeMixin from 'vue-material/src/core/components/mdTheme/mixin';
 
   export default {
     mixins: [themeMixin],

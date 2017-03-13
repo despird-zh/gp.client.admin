@@ -12,8 +12,8 @@
 }
 </style>
 <script>
-  import uniqueId from '../../utils/uniqueId';
-  import getClosestVueParent from '../../utils/getClosestVueParent';
+  import uniqueId from 'vue-material/src/core/utils/uniqueId';
+  import getClosestVueParent from 'vue-material/src/core/utils/getClosestVueParent';
 
   export default {
     props: {
