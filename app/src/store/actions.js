@@ -19,9 +19,9 @@ const reIssueToken = ({ commit, state }, {apiName, requestBody}) => {
 
     let _options = {
     	headers: {
-      Authorization: 'Bearer: ' + state.principal.jwttoken,
-      Accept: 'application/json'
-    }
+        Authorization: 'Bearer: ' + state.principal.jwttoken,
+        Accept: 'application/json'
+      }
    	};
    	let _url = state.baseUrl + 'reissue.do';
 
@@ -70,11 +70,11 @@ const reFetchToken = ({ commit, state }, {apiName, requestBody}) => {
           commit(types.SAVE_JWT_TOKEN, respdata.data);
 
           let _options = {
-			    	headers: {
-			          Authorization: 'Bearer: ' + respdata.data,
-			          Accept: 'application/json'
-			        }
-			   	};
+            headers: {
+              Authorization: 'Bearer: ' + respdata.data,
+              Accept: 'application/json'
+            }
+          };
 
           Vue.http.post(state.baseUrl + apiName, requestBody, _options).then(
             (newresponse) => {
@@ -88,7 +88,7 @@ const reFetchToken = ({ commit, state }, {apiName, requestBody}) => {
         }
 
       }, (response) => {
-      	reject(response);
+      reject(response);
     });
   });
 };
@@ -111,4 +111,29 @@ const logon = ({ commit, state }, authenBody) => {
   });
 };
 
-export default {savePrincipal, saveJwtToken, resetJwtToken, reIssueToken, reFetchToken, logon};
+const logoff = ({ commit, state }) => {
+  return new Promise((resolve, reject) => {
+    let _options = {
+      headers: {
+        Authorization: 'Bearer: ' + state.principal.jwttoken,
+        Accept: 'application/json'
+      }
+    };
+    let _url = state.baseUrl + 'logoff.do';
+
+    Vue.http.get(_url, _options).then(
+      (response) => {
+        let respdata = response.body;
+
+        if (respdata.meta.state === 'success') {
+          commit(types.RESET_JWT_TOKEN);
+        }
+        resolve(response);
+      }, (response) => {
+      reject(response);
+    }
+    );
+  });
+};
+
+export default {savePrincipal, saveJwtToken, resetJwtToken, reIssueToken, reFetchToken, logon, logoff};

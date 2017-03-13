@@ -119,7 +119,7 @@
             this.$refs.msgbar.open();
           },
           (response) => {
-            console.log(response);
+            this.$rejectTrap(response);
           }
         );
       },
@@ -137,7 +137,7 @@
             this.$refs.msgbar.open();
           },
           (response) => {
-            console.log(response);
+            this.$rejectTrap(response);
           }
         );
       }

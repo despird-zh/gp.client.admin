@@ -18,21 +18,19 @@
 </style>
 
 <script>
-  const PAGE_ID = 'users';
 
   import routePage from '../../common/RoutePage';
   export default {
     mixins: [routePage],
     data: () => {
-      return {};
+      return {
+        pageId: 'entities'
+      };
     },
     props: {
       name: String
     },
     methods: {
-      getPageId() {
-        return PAGE_ID;
-      }
     }
   };
 </script>

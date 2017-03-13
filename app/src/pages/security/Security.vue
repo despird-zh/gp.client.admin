@@ -25,7 +25,7 @@
       pageInfos: {
         users: {
           icon: 'person',
-          label: 'Persion',
+          label: 'Person',
           title: 'User Account',
           description: 'Maintein the accounts',
           link: '#/security/users'

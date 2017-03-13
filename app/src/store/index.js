@@ -10,8 +10,8 @@ import { state, mutations } from './mutations';
 Vue.use(Vuex);
 
 const debug = process.env.NODE_ENV !== 'production';
-const plugins = debug ? [createLogger(), stateCache] : [stateCache];
 
+const plugins = debug ? [createLogger()] : [];
 
 export default new Vuex.Store({
   state,

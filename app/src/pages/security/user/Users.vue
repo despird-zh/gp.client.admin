@@ -21,8 +21,8 @@
           <label for="type">Type</label>
           <md-select name="type" id="type" v-model="type">
             <md-option value="ALL">All</md-option>
-            <md-option value="INTERNAL">Internal</md-option>
-            <md-option value="EXTERNAL">External</md-option>
+            <md-option value="-9999">Internal</md-option>
+            <md-option value="0">External</md-option>
           </md-select>
         </md-input-container>
         <div class="gp-spacer"></div>
@@ -48,9 +48,13 @@
         </md-table-header>
 
         <md-table-body>
-          <md-table-row v-for="(row, index) in 6" :key="index">
-            <md-table-cell>Dessert Name</md-table-cell>
-            <md-table-cell v-for="(col, index) in 5" :key="index">10</md-table-cell>
+          <md-table-row v-for="(user, key) in users" :key="key">
+            <md-table-cell>{{ user.sourceName }}</md-table-cell>
+            <md-table-cell>{{ user.account }}</md-table-cell>
+            <md-table-cell>{{ user.email }}</md-table-cell>
+            <md-table-cell>{{ user.mobile }}</md-table-cell>
+            <md-table-cell>{{ user.state }}</md-table-cell>
+            <md-table-cell>{{ user.lastLogonDate }}</md-table-cell>
             <md-table-cell>
               <md-button class="md-icon-button md-xmini">
                 <md-icon>edit</md-icon>
@@ -92,11 +96,7 @@
         filterkey: '',
         state: 'ALL',
         type: 'ALL',
-        users: {
-          '001': {
-
-          }
-        },
+        users: {},
         message: ''
       };
     },
@@ -122,17 +122,16 @@
           let meta = response.body.meta;
 
           if (meta.state === 'success') {
-            this.settings = {};
+            this.users = {};
             for ( let i = 0; i < data.length; i++) {
-              this.settings[data[i].option] = data[i];
+              this.users[data[i].infoId.id] = data[i];
             }
-          } else {
-            this.message = meta.message;
-            this.$refs.msgbar.open();
           }
+          this.message = meta.message;
+          this.$refs.msgbar.open();
+
         }, (response) => {
-          console.log('----- fail ');
-          console.log(response);
+          this.$rejectTrap(response);
         });
 
       }
