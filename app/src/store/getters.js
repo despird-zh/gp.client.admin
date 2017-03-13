@@ -45,5 +45,6 @@ const tokenState = (state) => {
   return 'NORMAL';
 
 };
-// export getters as default 
+// export getters as default
+
 export default { jwttoken, subject, principal, audience, baseUrl, authenticated, parseToken, tokenState };
