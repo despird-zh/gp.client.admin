@@ -18,12 +18,12 @@ const reIssueToken = ({ commit, state }, {apiName, requestBody}) => {
   return new Promise((resolve, reject) => {
 
     let _options = {
-    	headers: {
+      headers: {
         Authorization: 'Bearer: ' + state.principal.jwttoken,
         Accept: 'application/json'
       }
-   	};
-   	let _url = state.baseUrl + 'reissue.do';
+    };
+    let _url = state.baseUrl + 'reissue.do';
 
     Vue.http.get(_url, _options).then(
       (response) => {
